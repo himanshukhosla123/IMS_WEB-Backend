@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import com.ims.Attendance.Student.StudentAttendanceDAO;
 import com.ims.Attendance.Student.StudentAttendanceDTO;
@@ -38,7 +38,7 @@ public class BatchAttendanceDAO {
 			pstm.setDate(2, new java.sql.Date(date.getTime()));
 			rs = pstm.executeQuery();
 			BatchAttendanceDTO baDto = new BatchAttendanceDTO(bId, date);
-			HashSet<StuStatus> attStatus = baDto.getStattSet();
+			TreeSet<StuStatus> attStatus = baDto.getStattSet();
 			while (rs.next()) {
 				attStatus.add(new StuStatus(rs.getInt(1), rs.getString(4)));
 			}
