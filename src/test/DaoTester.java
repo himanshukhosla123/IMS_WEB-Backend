@@ -1,16 +1,24 @@
 package test;
 
-import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashSet;
 
-import com.ims.Attendance.Employee.EmployeeAttendanceDAO;
-import com.ims.Attendance.Employee.EmployeeAttendanceDTO;
+import com.ims.Attendance.Batch.BatchAttendanceDAO;
+import com.ims.Attendance.Batch.BatchAttendanceDTO;
+import com.ims.Attendance.Batch.StuStatus;
 
 public class DaoTester {
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		EmployeeAttendanceDAO e=new EmployeeAttendanceDAO();
-		System.out.println(e.updDto(new EmployeeAttendanceDTO(5, new Date(),"ASD")));
+	public static void main(String[] args) throws Exception {
+		//EmployeeAttendanceDAO e=new EmployeeAttendanceDAO();
+		//StudentAttendanceDAO a=new StudentAttendanceDAO();
+		BatchAttendanceDAO b=new BatchAttendanceDAO();
+		HashSet<StuStatus>ab=new HashSet<>();
+		ab.add(new StuStatus(10, "a"));
+		ab.add(new StuStatus(11, "ab"));
+		ab.add(new StuStatus(13, "ac"));
+		ab.add(new StuStatus(14, "as"));
+		System.out.println(b.readAtt(new BatchAttendanceDTO(4, new Date())));
 	}
 
 }

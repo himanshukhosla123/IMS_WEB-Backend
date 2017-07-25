@@ -1,13 +1,13 @@
 package com.ims.Attendance.Batch;
 
 import java.util.Date;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class BatchAttendanceDTO {
 	
 	private int bId;
 	private Date date;
-	private TreeSet<StuStatus> stattSet;
+	private HashSet<StuStatus> stattSet;
 
 	@Override
 	public String toString() {
@@ -21,7 +21,7 @@ public class BatchAttendanceDTO {
 	public BatchAttendanceDTO(int bId, Date date) {
 		this.bId = bId;
 		this.date = date;
-		this.stattSet= new TreeSet<>();
+		this.stattSet= new HashSet<>();
 	}
 
 		public int getbId() {
@@ -40,17 +40,17 @@ public class BatchAttendanceDTO {
 		this.date = date;
 	}
 
-	public BatchAttendanceDTO(int bId, Date date, TreeSet<StuStatus> stattSet) {
+	public BatchAttendanceDTO(int bId, Date date, HashSet<StuStatus> stattSet) {
 		this.bId = bId;
 		this.date = date;
 		this.stattSet = stattSet;
 	}
 
-	public TreeSet<StuStatus> getStattSet() {
+	public HashSet<StuStatus> getStattSet() {
 		return stattSet;
 	}
 
-	public void setStattMap(TreeSet<StuStatus> stattSet) {
+	public void setStattMap(HashSet<StuStatus> stattSet) {
 		this.stattSet = stattSet;
 	}
 
