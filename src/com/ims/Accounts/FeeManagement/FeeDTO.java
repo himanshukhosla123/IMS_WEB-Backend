@@ -4,8 +4,9 @@ public class FeeDTO {
 	
 	private int studentId;
 	private int courseId;
-	private int stuPaymentId;
+	private int stuFeeId;
 	private String status;
+	
 	public int getStudentId() {
 		return studentId;
 	}
@@ -18,11 +19,11 @@ public class FeeDTO {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	public int getPaymentID() {
-		return stuPaymentId;
+	public int getStuFeeID() {
+		return stuFeeId;
 	}
-	public void setPaymentID(int stuPaymentId) {
-		this.stuPaymentId = stuPaymentId;
+	public void setStuFeeID(int stuFeeId) {
+		this.stuFeeId = stuFeeId;
 	}
 	public String getStatus() {
 		return status;
@@ -32,8 +33,15 @@ public class FeeDTO {
 	}
 	@Override
 	public String toString() {
-		return "FeeDTO [studentId=" + studentId + ", courseId=" + courseId + ", paymentId=" + stuPaymentId + ", status="
+		return "FeeDTO [studentId=" + studentId + ", courseId=" + courseId + ", stuFeeId=" + stuFeeId + ", status="
 				+ status + "]";
+	}
+	public FeeDTO(int studentId, int courseId, int stuFeeId, String status) {
+		super();
+		this.studentId = studentId;
+		this.courseId = courseId;
+		this.stuFeeId = stuFeeId;
+		this.status = status;
 	}
 
 }
