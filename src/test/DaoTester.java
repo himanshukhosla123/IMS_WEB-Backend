@@ -21,7 +21,7 @@ public class DaoTester {
 		System.out.println(new BatchAttendanceController().workOnBatchAttendence(2));
 		System.out.println(new BatchAttendanceController().workOnBatchAttendence(3));
 		
-
+	
 	
 	}
 
