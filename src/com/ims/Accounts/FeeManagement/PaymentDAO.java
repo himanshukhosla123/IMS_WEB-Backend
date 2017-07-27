@@ -46,7 +46,7 @@ public class PaymentDAO {
 		ArrayList<PaymentDTO> paymentList = new ArrayList<>();
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.READ_PAYMENT);
+			ps = con.prepareStatement(IPayment.READ_PAYMENT_ALL);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				paymentList.add(new PaymentDTO(rs.getInt(1), rs.getDouble(2), rs.getDate(3), rs.getDate(4)));
@@ -91,13 +91,38 @@ public class PaymentDAO {
 		}
 	}
 	
-	public boolean deletePayment(PaymentDTO paymentDTO) throws ClassNotFoundException, SQLException {
+	public boolean deletePayment(int stuFeeId) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IPayment.DELETE_PAYMENT);
-			ps.setInt(1, paymentDTO.getStuFeeID());
+			ps.setInt(1, stuFeeId);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		finally {
+			if(ps != null) {
+				ps.close();
+			}
+			if(con != null) {
+				con.close();
+			}
+		}
+	}
+
+	public boolean deletePayment(int stuFeeId, java.util.Date date) throws ClassNotFoundException, SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = CommonDAO.getConnection();
+			ps = con.prepareStatement(IPayment.DELETE_PAYMENT_ON_DATE);
+			ps.setInt(1, stuFeeId);
+			ps.setDate(2, (Date) date);
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}

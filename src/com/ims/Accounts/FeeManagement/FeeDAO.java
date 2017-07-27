@@ -45,7 +45,7 @@ public class FeeDAO {
 		ArrayList<FeeDTO> feeList = new ArrayList<>();
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IFee.READ_FEE);
+			ps = con.prepareStatement(IFee.READ_FEE_ALL);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				feeList.add(new FeeDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
@@ -91,13 +91,13 @@ public class FeeDAO {
 		}
 	}
 	
-	public boolean deleteFee(FeeDTO feeDTO) throws ClassNotFoundException, SQLException {
+	public boolean deleteFee(int stuFeeId) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IFee.DELETE_FEE);
-			ps.setInt(1, feeDTO.getStuFeeID());
+			ps.setInt(1, stuFeeId);
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -114,5 +114,21 @@ public class FeeDAO {
 			}
 		}
 	}
+	
+	/*public boolean isAlreadyPaid() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		pstmt = con.prepareStatement(SqlQuery.IF_FEE_PAID);
+		return false;
+	}*/
+	
+	/*public boolean isAlreadyExist() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		pstmt = con.prepareStatement(IFee.IF_FEE_PAID);
+		return false;
+	}*/
 
 }
