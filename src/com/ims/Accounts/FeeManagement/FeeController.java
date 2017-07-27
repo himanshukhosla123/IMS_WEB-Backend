@@ -35,7 +35,7 @@ public class FeeController {
 		return false;
 	}
 	
-	public boolean deleteCourse(FeeDTO feeDTO) {
+	public boolean deleteFee(FeeDTO feeDTO) {
 		FeeDAO feeDAO = new FeeDAO();
 		try {
 			return feeDAO.deleteFee(feeDTO);
