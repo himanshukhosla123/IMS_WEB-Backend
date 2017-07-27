@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class PaymentDTO {
 	
-	private int stuPaymentId;
+	private int stuFeeId;
 	private double payment;
 	private Date paymentDate;
 	private Date dueDate;
-	public int getPaymentID() {
-		return stuPaymentId;
+	public int getStuFeeID() {
+		return stuFeeId;
 	}
-	public void setPaymentID(int stuPaymentId) {
-		this.stuPaymentId = stuPaymentId;
+	public void setStuFeeID(int stuFeeId) {
+		this.stuFeeId = stuFeeId;
 	}
 	public double getPayment() {
 		return payment;
@@ -34,8 +34,15 @@ public class PaymentDTO {
 	}
 	@Override
 	public String toString() {
-		return "PaymentDTO [paymentID=" + stuPaymentId + ", payment=" + payment + ", paymentDate=" + paymentDate
+		return "PaymentDTO [stuFeeID=" + stuFeeId + ", payment=" + payment + ", paymentDate=" + paymentDate
 				+ ", dueDate=" + dueDate + "]";
+	}
+	public PaymentDTO(int stuFeeId, double payment, Date paymentDate, Date dueDate) {
+		super();
+		this.stuFeeId = stuFeeId;
+		this.payment = payment;
+		this.paymentDate = paymentDate;
+		this.dueDate = dueDate;
 	}
 
 }
