@@ -45,7 +45,7 @@ public class FeeController {
 	}
 
 	private void isAlreadyExist() {
-		if()
+
 	}
 	
 	private boolean checkFee() {
@@ -57,7 +57,7 @@ public class FeeController {
 	}
 	
 	private boolean alreadyPaid() {
-		if()
+
 		return true;
 	}
 	

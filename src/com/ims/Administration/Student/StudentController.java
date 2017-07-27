@@ -55,6 +55,7 @@ public class StudentController {
                
            System.out.println("added");
            System.out.println(new Date());
+           scanner.close();
   		  
 }
 }

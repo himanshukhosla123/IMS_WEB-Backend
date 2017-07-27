@@ -14,36 +14,36 @@ import com.ims.Common.Utils.SqlQuery;
 
 public class BatchAttendanceDAO {
 
-	public int addAtt(BatchAttendanceDTO dto) throws ClassNotFoundException, SQLException {
+	public int addBatchAttendance(BatchAttendanceDTO dto) throws ClassNotFoundException, SQLException {
 		int recordCount = 0;
 		StudentAttendanceDAO studentDAO = new StudentAttendanceDAO();
-		for (StuStatus attStatus : dto.getStattSet()) {
-			recordCount += studentDAO.addAtt(
-					new StudentAttendanceDTO(attStatus.getsId(), dto.getbId(), dto.getDate(), attStatus.getStatus()));
+		for (StudentStatus studentStatus : dto.getStudentStatusSet()) {
+			if(studentDAO.addStudentAttendance(new StudentAttendanceDTO(studentStatus.getStudentID(), dto.getBatchID(), dto.getDate(), studentStatus.getStatus()))){
+				++recordCount;
+			}
 		}
 		return recordCount;
-
 	}
 
-	public BatchAttendanceDTO readAtt(BatchAttendanceDTO dto) throws Exception {
+	public BatchAttendanceDTO readBatchAttendance(BatchAttendanceDTO dto) throws ClassNotFoundException, SQLException  {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		try {
 			con = CommonDAO.getConnection();
 			pstm = con.prepareStatement(SqlQuery.READ_BATCH_ATT);
-			int bId = dto.getbId();
+			int batchID = dto.getBatchID();
 			Date date = dto.getDate();
-			pstm.setInt(1, bId);
+			pstm.setInt(1, batchID);
 			pstm.setDate(2, new java.sql.Date(date.getTime()));
 			rs = pstm.executeQuery();
-			BatchAttendanceDTO baDto = new BatchAttendanceDTO(bId, date);
-			TreeSet<StuStatus> attStatus = baDto.getStattSet();
+			BatchAttendanceDTO batchAttendanceDTO = new BatchAttendanceDTO(batchID, date);
+			TreeSet<StudentStatus> studentStatus = batchAttendanceDTO.getStudentStatusSet();
 			while (rs.next()) {
-				attStatus.add(new StuStatus(rs.getInt(1), rs.getString(4)));
+				studentStatus.add(new StudentStatus(rs.getInt(1), rs.getString(4)));
 			}
-			baDto.setStattMap(attStatus);
-			return baDto;
+			batchAttendanceDTO.setStudentStatusSet(studentStatus);
+			return batchAttendanceDTO;
 		} finally {
 			if (rs != null) {
 				rs.close();

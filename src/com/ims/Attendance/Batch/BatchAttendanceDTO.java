@@ -5,31 +5,38 @@ import java.util.TreeSet;
 
 public class BatchAttendanceDTO {
 	
-	private int bId;
+	private int batchID;
 	private Date date;
-	private TreeSet<StuStatus> stattSet;
+	private TreeSet<StudentStatus> studentStatusSet;
 
 	@Override
 	public String toString() {
-		return "BatchAttendanceDTO [bId=" + bId + ", date=" + date + ", stattSet=" + stattSet + "]";
-	}
-	 
-	public StuStatus createStuStatus(int sId ,String status){
-		return new StuStatus(sId,status);
+		return "BatchAttendanceDTO [batchID=" + batchID + ", date=" + date + ", studentStatusSet=" + studentStatusSet
+				+ "]";
 	}
 
-	public BatchAttendanceDTO(int bId, Date date) {
-		this.bId = bId;
+	public StudentStatus createStuStatus(int studentID ,String status){
+		return new StudentStatus(studentID,status);
+	}
+
+	public BatchAttendanceDTO(int batchID, Date date) {
+		this.batchID = batchID;
 		this.date = date;
-		this.stattSet= new TreeSet<>();
+		this.studentStatusSet= new TreeSet<>();
 	}
 
-		public int getbId() {
-		return bId;
+	public BatchAttendanceDTO(int batchID, Date date, TreeSet<StudentStatus> studentStatusSet) {
+		this.batchID = batchID;
+		this.date = date;
+		this.studentStatusSet = studentStatusSet;
 	}
 
-	public void setbId(int bId) {
-		this.bId = bId;
+	public int getBatchID() {
+		return batchID;
+	}
+
+	public void setBatchID(int batchID) {
+		this.batchID = batchID;
 	}
 
 	public Date getDate() {
@@ -40,18 +47,12 @@ public class BatchAttendanceDTO {
 		this.date = date;
 	}
 
-	public BatchAttendanceDTO(int bId, Date date, TreeSet<StuStatus> stattSet) {
-		this.bId = bId;
-		this.date = date;
-		this.stattSet = stattSet;
+	public TreeSet<StudentStatus> getStudentStatusSet() {
+		return studentStatusSet;
 	}
 
-	public TreeSet<StuStatus> getStattSet() {
-		return stattSet;
-	}
-
-	public void setStattMap(TreeSet<StuStatus> stattSet) {
-		this.stattSet = stattSet;
+	public void setStudentStatusSet(TreeSet<StudentStatus> studentStatusSet) {
+		this.studentStatusSet = studentStatusSet;
 	}
 
 	

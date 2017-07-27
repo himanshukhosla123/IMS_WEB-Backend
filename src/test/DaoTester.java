@@ -1,24 +1,28 @@
 package test;
 
-import java.util.Date;
-import java.util.TreeSet;
-
-import com.ims.Attendance.Batch.BatchAttendanceDAO;
-import com.ims.Attendance.Batch.BatchAttendanceDTO;
-import com.ims.Attendance.Batch.StuStatus;
+import com.ims.Attendance.Batch.BatchAttendanceController;
+import com.ims.Attendance.Employee.EmployeeAttendanceController;
+import com.ims.Attendance.Student.StudentAttendanceController;
 
 public class DaoTester {
 
 	public static void main(String[] args) throws Exception {
 		//EmployeeAttendanceDAO e=new EmployeeAttendanceDAO();
 		//StudentAttendanceDAO a=new StudentAttendanceDAO();
-		BatchAttendanceDAO b=new BatchAttendanceDAO();
-		TreeSet<StuStatus>ab=new TreeSet<>();
-		ab.add(new StuStatus(10, "a"));
-		ab.add(new StuStatus(11, "ab"));
-		ab.add(new StuStatus(13, "ac"));
-		ab.add(new StuStatus(14, "as"));
-		System.out.println(b.readAtt(new BatchAttendanceDTO(4, new Date(),ab)));
+		System.out.println(new StudentAttendanceController().workOnStudentAttendence(1));
+		System.out.println(new StudentAttendanceController().workOnStudentAttendence(2));
+		System.out.println(new StudentAttendanceController().workOnStudentAttendence(3));
+		System.out.println(new StudentAttendanceController().workOnStudentAttendence(4));
+		System.out.println(new EmployeeAttendanceController().workOnEmployeeAttendence(1));
+		System.out.println(new EmployeeAttendanceController().workOnEmployeeAttendence(2));
+		System.out.println(new EmployeeAttendanceController().workOnEmployeeAttendence(3));
+		System.out.println(new EmployeeAttendanceController().workOnEmployeeAttendence(4));
+		System.out.println(new BatchAttendanceController().workOnBatchAttendence(1));
+		System.out.println(new BatchAttendanceController().workOnBatchAttendence(2));
+		System.out.println(new BatchAttendanceController().workOnBatchAttendence(3));
+		
+
+	
 	}
 
 }
