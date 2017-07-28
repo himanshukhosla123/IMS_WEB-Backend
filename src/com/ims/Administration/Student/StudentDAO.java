@@ -1,14 +1,14 @@
 package com.ims.Administration.Student;
 
-import static com.ims.Common.CommonDAO.IAdministratorSql.getConnection;
-import static com.ims.Common.sqlQueries.ISqlQueries.ADD_STUDENT;
-import static com.ims.Common.sqlQueries.ISqlQueries.READ_STUDENT;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.ims.Common.CommonDAO.CommonDAO;
+import static com.ims.Common.sqlQueries.ISqlQueries.ADD_STUDENT;
+import static com.ims.Common.sqlQueries.ISqlQueries.READ_STUDENT;
 
 
 public class StudentDAO {
@@ -17,7 +17,7 @@ public class StudentDAO {
     	PreparedStatement psmt = null;
     	int recCount;
     	try{
-    		con = getConnection();
+    		con = CommonDAO.getConnection();
     		con.setAutoCommit(false);
     		psmt = con.prepareStatement(ADD_STUDENT);
     		psmt.setInt(1,studentDTO.getSid());
@@ -60,7 +60,7 @@ public class StudentDAO {
       PreparedStatement psmt = null;
       ResultSet rs = null;
       try {
-    	  con = getConnection();
+    	  con = CommonDAO.getConnection();
     	  con.setAutoCommit(false);
     	  psmt = con.prepareStatement(READ_STUDENT);
     	  rs = psmt.executeQuery();

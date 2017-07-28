@@ -1,6 +1,5 @@
 package com.ims.Administration.Employee;
 
-import static com.ims.Common.CommonDAO.IAdministratorSql.getConnection;
 import static com.ims.Common.sqlQueries.ISqlQueries.ADD_EMPLOYEE;
 import static com.ims.Common.sqlQueries.ISqlQueries.READ_EMPLOYEE;
 
@@ -10,13 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.ims.Common.CommonDAO.CommonDAO;
+
 public class EmployeeDAO {
        public int addEmployee(EmployeeDTO employeeDTO) throws ClassNotFoundException, SQLException {
 		  Connection con = null;
 		  PreparedStatement psmt = null;
 		  int recCount;
 		  try {
-			  con = getConnection();
+			  con = CommonDAO.getConnection();
 			  con.setAutoCommit(false);
 			  psmt = con.prepareStatement(ADD_EMPLOYEE);
 			    psmt.setInt(1,employeeDTO.getEmpid());
@@ -62,7 +63,7 @@ public class EmployeeDAO {
     	    PreparedStatement psmt = null;
     	    ResultSet rs = null;
     	    try {
-    	    	con = getConnection();
+    	    	con = CommonDAO.getConnection();
     	    	psmt = con.prepareStatement(READ_EMPLOYEE);
     	    	rs = psmt.executeQuery();
     	    	while(rs.next()) {
