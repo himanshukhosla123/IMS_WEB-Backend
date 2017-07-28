@@ -5,33 +5,39 @@ import java.util.Date;
 public class StudentDTO {
     private int Sid;
     private String name;
-    private int age;
+    private String age;
     private String sex;
-    private int phoneNo;
+    private String phoneNo;
     private String email;
     private String photoPath;
     private Date dob;
-    private String fatherName;
-    private int fatherPhNo;
+    private String guardianName;
+    private String guardianPhNo;
     private String address;
     private Date dateOfJoin;
     private String status;
+    private String recommEmpId;
+    private int discount;
 
 public StudentDTO() {
 	
 }
 
+
 @Override
 public String toString() {
 	return "StudentDTO [Sid=" + Sid + ", name=" + name + ", age=" + age + ", sex=" + sex + ", phoneNo=" + phoneNo
-			+ ", email=" + email + ", photoPath=" + photoPath + ", dob=" + dob + ", fatherName=" + fatherName
-			+ ", fatherPhNo=" + fatherPhNo + ", address=" + address + ", dateOfJoin=" + dateOfJoin + ", status="
-			+ status + "]";
+			+ ", email=" + email + ", photoPath=" + photoPath + ", dob=" + dob + ", guardianName=" + guardianName
+			+ ", guardianPhNo=" + guardianPhNo + ", address=" + address + ", dateOfJoin=" + dateOfJoin + ", status="
+			+ status + ", recommEmpId=" + recommEmpId + ", discount=" + discount + "]";
 }
 
-public StudentDTO(int sid, String name, int age, String sex, int phoneNo, String email, String photoPath, Date dob, String fatherName,
-		int fatherPhNo, String address, Date dateOfJoin, String status) {
-	
+
+
+
+public StudentDTO(int sid, String name, String age, String sex, String phoneNo, String email, String photoPath,
+		Date dob, String guardianName, String guardianPhNo, String address, Date dateOfJoin, String status,
+		String recommEmpId, int discount) {
 	Sid = sid;
 	this.name = name;
 	this.age = age;
@@ -40,12 +46,15 @@ public StudentDTO(int sid, String name, int age, String sex, int phoneNo, String
 	this.email = email;
 	this.photoPath = photoPath;
 	this.dob = dob;
-	this.fatherName = fatherName;
-	this.fatherPhNo = fatherPhNo;
+	this.guardianName = guardianName;
+	this.guardianPhNo = guardianPhNo;
 	this.address = address;
 	this.dateOfJoin = dateOfJoin;
 	this.status = status;
+	this.recommEmpId = recommEmpId;
+	this.discount = discount;
 }
+
 
 public int getSid() {
 	return Sid;
@@ -71,13 +80,13 @@ public void setName(String name) {
 
 
 
-public int getAge() {
+public String getAge() {
 	return age;
 }
 
 
 
-public void setAge(int age) {
+public void setAge(String age) {
 	this.age = age;
 }
 
@@ -95,13 +104,13 @@ public void setSex(String sex) {
 
 
 
-public int getPhoneNo() {
+public String getPhoneNo() {
 	return phoneNo;
 }
 
 
 
-public void setPhoneNo(int phoneNo) {
+public void setPhoneNo(String phoneNo) {
 	this.phoneNo = phoneNo;
 }
 
@@ -131,26 +140,26 @@ public void setDob(Date dob) {
 
 
 
-public String getFatherName() {
-	return fatherName;
+public String getGuardianName() {
+	return guardianName;
 }
 
 
 
-public void setFatherName(String fatherName) {
-	this.fatherName = fatherName;
+public void setguardianName(String guardianName) {
+	this.guardianName = guardianName;
 }
 
 
 
-public int getFatherPhNo() {
-	return fatherPhNo;
+public String getGuardianPhNo() {
+	return guardianPhNo;
 }
 
 
 
-public void setFatherPhNo(int fatherPhNo) {
-	this.fatherPhNo = fatherPhNo;
+public void setguardianPhNo(String guardianPhNo) {
+	this.guardianPhNo = guardianPhNo;
 }
 
 
@@ -197,4 +206,16 @@ public void setPhotoPath(String photoPath) {
 	this.photoPath = photoPath;
 }
 
+public String getRecommEmpId() {
+	return recommEmpId;
+}
+public void setRecommEmpId(String recommEmpId) {
+	this.recommEmpId = recommEmpId;
+}
+public int getDiscount() {
+	return discount;
+}
+public void setDiscount(int discount) {
+	this.discount = discount;
+}
 }
