@@ -29,7 +29,7 @@ public class EmployeeTester {
 	         
 			
 	         EmployeeController eController = new EmployeeController();
-	         System.out.println("enter student id");
+	         System.out.println("enter employee id");
 	 		  empid = scanner.nextInt();
 	 		  System.out.println("name");
 	 		  name = scanner.next();
