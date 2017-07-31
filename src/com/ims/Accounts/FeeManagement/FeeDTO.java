@@ -1,46 +1,164 @@
 package com.ims.Accounts.FeeManagement;
 
+import java.util.Date;
+
 public class FeeDTO {
 	
-	private int studentId;
-	private int courseId;
-	private int stuFeeId;
+//VIEWABLE IN THE MAIN SCREEN ARE MARKED BY 'OK' AFTER THEM
+	private String TID;
+	private String SID; //OK
+	private String BID; 
+	private String CID; //OK - APPARENTLY COURSE NAMR
+	private double courseAmount; //ORIGINAL COURSE AMOUNT
+	private double payableAmount; //PAYABLE AMOUNT AFTER OFFER AND DISCOUNT
+	private String paymentMode;
+	private String ChequeId;
+	private Date paymentDate;
+	private Date installmentDate;
+	private double payment; // AMOUNT PAID ON PAYMENT_DATE
+	private double balance; // AMOUNT REMAINING
 	private String status;
 	
-	public int getStudentId() {
-		return studentId;
+	public FeeDTO(String tID, String sID, String cID, double payableAmount, Date installmentDate, double balance,
+			String status) {
+		super();
+		TID = tID;
+		SID = sID;
+		CID = cID;
+		this.payableAmount = payableAmount;
+		this.installmentDate = installmentDate;
+		this.balance = balance;
+		this.status = status;
 	}
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+
+	public FeeDTO(String tID, String sID, String bID, String cID, double courseAmount, double payableAmount,
+			String paymentMode, String chequeId, Date paymentDate, Date installmentDate, double payment, double balance,
+			String status) {
+		super();
+		TID = tID;
+		SID = sID;
+		BID = bID;
+		CID = cID;
+		this.courseAmount = courseAmount;
+		this.payableAmount = payableAmount;
+		this.paymentMode = paymentMode;
+		ChequeId = chequeId;
+		this.paymentDate = paymentDate;
+		this.installmentDate = installmentDate;
+		this.payment = payment;
+		this.balance = balance;
+		this.status = status;
 	}
-	public int getCourseId() {
-		return courseId;
+
+	@Override
+	public String toString() {
+		return "FeeDTO [TID=" + TID + ", SID=" + SID + ", BID=" + BID + ", CID=" + CID + ", courseAmount="
+				+ courseAmount + ", payableAmount=" + payableAmount + ", paymentMode=" + paymentMode + ", ChequeId="
+				+ ChequeId + ", paymentDate=" + paymentDate + ", installmentDate=" + installmentDate + ", payment="
+				+ payment + ", balance=" + balance + ", status=" + status + "]";
 	}
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
+
+	public String getTID() {
+		return TID;
 	}
-	public int getStuFeeID() {
-		return stuFeeId;
+
+	public void setTID(String tID) {
+		TID = tID;
 	}
-	public void setStuFeeID(int stuFeeId) {
-		this.stuFeeId = stuFeeId;
+
+	public String getSID() {
+		return SID;
 	}
+
+	public void setSID(String sID) {
+		SID = sID;
+	}
+
+	public String getBID() {
+		return BID;
+	}
+
+	public void setBID(String bID) {
+		BID = bID;
+	}
+
+	public String getCID() {
+		return CID;
+	}
+
+	public void setCID(String cID) {
+		CID = cID;
+	}
+
+	public double getCourseAmount() {
+		return courseAmount;
+	}
+
+	public void setCourseAmount(double courseAmount) {
+		this.courseAmount = courseAmount;
+	}
+
+	public double getPayableAmount() {
+		return payableAmount;
+	}
+
+	public void setPayableAmount(double payableAmount) {
+		this.payableAmount = payableAmount;
+	}
+
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+
+	public String getChequeId() {
+		return ChequeId;
+	}
+
+	public void setChequeId(String chequeId) {
+		ChequeId = chequeId;
+	}
+
+	public Date getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+	public Date getInstallmentDate() {
+		return installmentDate;
+	}
+
+	public void setInstallmentDate(Date installmentDate) {
+		this.installmentDate = installmentDate;
+	}
+
+	public double getPayment() {
+		return payment;
+	}
+
+	public void setPayment(double payment) {
+		this.payment = payment;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
-		this.status = status;
-	}
-	@Override
-	public String toString() {
-		return "FeeDTO [studentId=" + studentId + ", courseId=" + courseId + ", stuFeeId=" + stuFeeId + ", status="
-				+ status + "]";
-	}
-	public FeeDTO(int studentId, int courseId, int stuFeeId, String status) {
-		super();
-		this.studentId = studentId;
-		this.courseId = courseId;
-		this.stuFeeId = stuFeeId;
 		this.status = status;
 	}
 
