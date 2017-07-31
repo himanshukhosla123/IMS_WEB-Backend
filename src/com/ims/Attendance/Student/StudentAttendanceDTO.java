@@ -3,34 +3,49 @@ package com.ims.Attendance.Student;
 import java.util.Date;
 
 public class StudentAttendanceDTO {
-	private int sId;
-	private int bId;
+	private int studentID;
+	private int batchID;
 	private Date date;
 	private String status;
 
 	@Override
 	public String toString() {
-		return "AttDto [sId=" + sId + ", bId=" + bId + ", date=" + date + ", status=" + status + "]";
-	}
-	
-	public int getsId() {
-		return sId;
+		return "StudentAttendanceDTO [studentID=" + studentID + ", batchID=" + batchID + ", date=" + date + ", status="
+				+ status + "]";
 	}
 
-	public StudentAttendanceDTO(int bId, Date date) {
-		this.bId = bId;
+	public StudentAttendanceDTO(int batchID, Date date) {
+		this.batchID = batchID;
 		this.date = date;
 	}
 
-	public void setsId(int sId) {
-		this.sId = sId;
-	}
-	public int getbId() {
-		return bId;
+	public StudentAttendanceDTO(int studentID, int batchID, Date date, String status) {
+		this.studentID = studentID;
+		this.batchID = batchID;
+		this.date = date;
+		this.status = status;
 	}
 
-	public void setbId(int bId) {
-		this.bId = bId;
+	public StudentAttendanceDTO(int studentID, int batchID, Date date) {
+		this.studentID = studentID;
+		this.batchID = batchID;
+		this.date = date;
+	}
+
+	public int getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
+	}
+
+	public int getBatchID() {
+		return batchID;
+	}
+
+	public void setBatchID(int batchID) {
+		this.batchID = batchID;
 	}
 
 	public Date getDate() {
@@ -48,18 +63,7 @@ public class StudentAttendanceDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public StudentAttendanceDTO(int sId, int bId, Date date, String status) {
-		this.sId = sId;
-		this.bId = bId;
-		this.date = date;
-		this.status = status;
-	}
-
-	public StudentAttendanceDTO(int sId, int bId, Date date) {
-		this.sId = sId;
-		this.bId = bId;
-		this.date = date;
-	}
+	
+	
 
 }

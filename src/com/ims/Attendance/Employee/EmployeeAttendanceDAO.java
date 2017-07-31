@@ -10,17 +10,19 @@ import com.ims.Common.CommonDAO.CommonDAO;
 import com.ims.Common.Utils.SqlQuery;
 
 public class EmployeeAttendanceDAO {
-	public int addAtt(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
+	public boolean addEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = CommonDAO.getConnection();
 			pstmt = con.prepareStatement(SqlQuery.ADD_EMPLOYEE_ATT);
-			pstmt.setInt(1, dto.geteId());
+			pstmt.setInt(1, dto.getEmployeeID());
 			pstmt.setDate(2, new java.sql.Date(dto.getDate().getTime()));
 			pstmt.setString(3, dto.getStatus());
-			int recordCount = pstmt.executeUpdate();
-			return recordCount;
+			if(pstmt.executeUpdate()>0){
+			return true;
+			}
+			return false;
 		} finally {
 			if (pstmt != null) {
 				pstmt.close();
@@ -33,7 +35,7 @@ public class EmployeeAttendanceDAO {
 	
 	
 
-	public ArrayList<EmployeeAttendanceDTO> readAtt(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
+	public ArrayList<EmployeeAttendanceDTO> readEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -41,7 +43,7 @@ public class EmployeeAttendanceDAO {
 		try {
 			con = CommonDAO.getConnection();
 			pstm = con.prepareStatement(SqlQuery.READ_EMPLOYEE_ATT);
-			pstm.setInt(1, dto.geteId());
+			pstm.setInt(1, dto.getEmployeeID());
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				al.add(new EmployeeAttendanceDTO(rs.getInt(1), rs.getDate(2), rs.getString(3)));
@@ -61,13 +63,13 @@ public class EmployeeAttendanceDAO {
 
 	}
 
-	public boolean updDto(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException  {
+	public boolean updateEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException  {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = CommonDAO.getConnection();
 			pstmt = con.prepareStatement(SqlQuery.UPDATE_EMPLOYEE_ATT);
-			pstmt.setInt(2, dto.geteId());
+			pstmt.setInt(2, dto.getEmployeeID());
 			pstmt.setDate(3, new java.sql.Date(dto.getDate().getTime()));
 			pstmt.setString(1, dto.getStatus());
 			if (pstmt.executeUpdate() > 0) {

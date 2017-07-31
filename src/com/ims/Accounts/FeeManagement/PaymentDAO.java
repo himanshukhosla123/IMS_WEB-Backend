@@ -120,7 +120,7 @@ public class PaymentDAO {
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.DELETE_PAYMENT_ON_DATE);
+			//ps = con.prepareStatement(IPayment.DELETE_PAYMENT_ON_DATE);
 			ps.setInt(1, stuFeeId);
 			ps.setDate(2, (Date) date);
 			if(ps.executeUpdate() > 0) {

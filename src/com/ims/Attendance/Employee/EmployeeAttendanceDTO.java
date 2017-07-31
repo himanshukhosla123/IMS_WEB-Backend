@@ -3,32 +3,27 @@ package com.ims.Attendance.Employee;
 import java.util.Date;
 
 public class EmployeeAttendanceDTO {
-	private int eId;
+	private int employeeID;
 	private Date date;
 	private String status;
 	
-	@Override
-	public String toString() {
-		return "EmployeeAttendanceDTO [eId=" + eId + ", date=" + date + ", status=" + status + "]";
-	}
-
-	public EmployeeAttendanceDTO(int eId, Date date, String status) {
-		this.eId = eId;
+	public EmployeeAttendanceDTO(int employeeID, Date date, String status) {
+		this.employeeID = employeeID;
 		this.date = date;
 		this.status = status;
 	}
 
-	public EmployeeAttendanceDTO(int eId, Date date) {
-		this.eId = eId;
+	public EmployeeAttendanceDTO(int employeeID, Date date) {
+		this.employeeID=employeeID;
 		this.date = date;
 	}
 
-	public int geteId() {
-		return eId;
+	public int getEmployeeID() {
+		return employeeID;
 	}
 
-	public void seteId(int eId) {
-		this.eId = eId;
+	public void setEmployeeID(int employeeID) {
+		this.employeeID = employeeID;
 	}
 
 	public Date getDate() {
