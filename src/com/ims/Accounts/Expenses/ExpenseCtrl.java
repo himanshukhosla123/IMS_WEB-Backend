@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -28,16 +29,16 @@ public class ExpenseCtrl extends HttpServlet {
 		switch(choice) {
 		case "create": {
 //			<input type="submit" name="choose" value="create"/>
-			boolean change = addExpense(request, response);
+			boolean change = createExpense(request, response);
 			System.out.println("Expense Added : "+ change);
 		}break;
 		case "readAll": {
-//			<input type="submit" name="choose" value="readAll"/>
+//			<input type="button" name="choose" value="readAll"/>
 			boolean change = readAllExpense(request, response);
 			System.out.println("All Expense Read : "+ change);
 		}break;
 		case "read": {
-//			<input type="submit" name="choose" value="read"/>
+//			<input type="button" name="choose" value="read"/>
 			boolean change = readExpense(request, response);
 			System.out.println("Expense Read : "+ change);
 		}break;
@@ -47,7 +48,7 @@ public class ExpenseCtrl extends HttpServlet {
 			System.out.println("Expense Update : "+ change);
 		}break;
 		case "delete": {
-//			<input type="submit" name="choose" value="delete"/>
+//			<input type="button" name="choose" value="delete"/>
 			boolean change = deleteExpense(request, response);
 			System.out.println("Expense Delete : "+ change);
 		}break;
@@ -57,17 +58,15 @@ public class ExpenseCtrl extends HttpServlet {
 		}
 	}
 
-	private boolean deleteExpense(HttpServletRequest request, HttpServletResponse response) {
-		
-	}
-
-	private boolean updateExpense(HttpServletRequest request, HttpServletResponse response) {
+	private boolean createExpense(HttpServletRequest request, HttpServletResponse response) {
 		String expenseID = request.getParameter("expenseId");
 		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		Date date = null;
 		try {
-			Date date = dateFormat.parse(request.getParameter("date"));
+			date = dateFormat.parse(request.getParameter("date"));
 		} catch (ParseException e) {
 			e.printStackTrace();
+			return false;
 		}
 		String category = request.getParameter("category");
 		String description = request.getParameter("description");
@@ -83,6 +82,20 @@ public class ExpenseCtrl extends HttpServlet {
 		ExpenseDAO expenseDAO = new ExpenseDAO();
 		try {
 			expenseDAO.addExpense(expenseDTO);
+			return true;
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private boolean readAllExpense(HttpServletRequest request, HttpServletResponse response) {
+		ExpenseDAO expenseDAO = new ExpenseDAO();
+		/*expenseList has to be returned so that it can fill up the fields*/
+		ArrayList<ExpenseDTO> expenseList;
+		try {
+			expenseList = expenseDAO.readAllExpense();
+			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -90,20 +103,29 @@ public class ExpenseCtrl extends HttpServlet {
 	}
 
 	private boolean readExpense(HttpServletRequest request, HttpServletResponse response) {
-		
+		/*Still not fixed - something like this in which you get the id of the one which is selected*/
+		String expenseID = request.getParameter("expeneId");
+		ExpenseDAO expenseDAO = new ExpenseDAO();
+		/*expenseDTO has to be returned so that it can fill up the fields*/
+		ExpenseDTO expenseDTO;
+		try {
+			expenseDTO = expenseDAO.readExpense(expenseID);
+			return true;
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
-	private boolean readAllExpense(HttpServletRequest request, HttpServletResponse response) {
-			
-	}
-
-	private boolean addExpense(HttpServletRequest request, HttpServletResponse response) {
+	private boolean updateExpense(HttpServletRequest request, HttpServletResponse response) {
 		String expenseID = request.getParameter("expenseId");
 		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		Date date = null;
 		try {
-			Date date = dateFormat.parse(request.getParameter("date"));
+			date = dateFormat.parse(request.getParameter("date"));
 		} catch (ParseException e) {
 			e.printStackTrace();
+			return false;
 		}
 		String category = request.getParameter("category");
 		String description = request.getParameter("description");
@@ -118,7 +140,21 @@ public class ExpenseCtrl extends HttpServlet {
 				expenditure, advance, paymentMode, chequeID, balance, status);
 		ExpenseDAO expenseDAO = new ExpenseDAO();
 		try {
-			expenseDAO.addExpense(expenseDTO);
+			expenseDAO.updateExpense(expenseDTO);
+			return true;
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private boolean deleteExpense(HttpServletRequest request, HttpServletResponse response) {
+		/*Still not fixed - something like this in which you get the id of the one which is selected*/
+		String expenseID = request.getParameter("expeneId");
+		ExpenseDAO expenseDAO = new ExpenseDAO();
+		try {
+			expenseDAO.deleteExpense(expenseID);
+			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
