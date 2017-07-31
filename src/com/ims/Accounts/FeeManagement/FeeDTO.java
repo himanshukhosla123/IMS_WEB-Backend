@@ -18,7 +18,7 @@ public class FeeDTO {
 	private double payment; // AMOUNT PAID ON PAYMENT_DATE
 	private double balance; // AMOUNT REMAINING
 	private String status;
-	
+
 	public FeeDTO(String tID, String sID, String cID, double payableAmount, Date installmentDate, double balance,
 			String status) {
 		super();

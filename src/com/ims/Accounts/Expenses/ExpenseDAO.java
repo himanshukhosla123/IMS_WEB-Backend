@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ims.Common.CommonDAO.CommonDAO;
-import com.ims.Common.CommonDAO.IPayment;
+import com.ims.Common.CommonDAO.IExpense;
 
 public class ExpenseDAO {
 	
@@ -16,7 +16,7 @@ public class ExpenseDAO {
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.CREATE_PAYMENT);
+			ps = con.prepareStatement(IExpense.CREATE_EXPENSE);
 			ps.setString(1, expenseDTO.getExpenseID());
 			ps.setDate(2, (java.sql.Date) expenseDTO.getDate());
 			ps.setString(3, expenseDTO.getCategory());
@@ -49,16 +49,16 @@ public class ExpenseDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ArrayList<ExpenseDTO> paymentList = new ArrayList<>();
+		ArrayList<ExpenseDTO> expenseList = new ArrayList<>();
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.READ_PAYMENT_ALL);
+			ps = con.prepareStatement(IExpense.READ_ALL_EXPENSE);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				paymentList.add(new ExpenseDTO(rs.getString("Expense ID"), rs.getDate("Date"), rs.getString("Category"), 
+				expenseList.add(new ExpenseDTO(rs.getString("Expense ID"), rs.getDate("Date"), rs.getString("Category"), 
 						rs.getString("EID"), rs.getDouble("Expenditure"), rs.getString("Status")));
 			}
-			return paymentList;
+			return expenseList;
 		}
 		finally {
 			if(rs != null) {
@@ -73,21 +73,21 @@ public class ExpenseDAO {
 		}
 	}
 	
-	public ArrayList<ExpenseDTO> readExpense() throws SQLException, ClassNotFoundException{
+	public ExpenseDTO readExpense(String expenseID) throws SQLException, ClassNotFoundException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ArrayList<ExpenseDTO> paymentList = new ArrayList<>();
+		ExpenseDTO expenseDTO;
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.READ_PAYMENT_ALL);
+			ps = con.prepareStatement(IExpense.READ_EXPENSE);
+			ps.setString(1, "expenseID");
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				paymentList.add(new ExpenseDTO(rs.getString("Expense ID"), rs.getDate("Date"), rs.getString("Category"), 
-						rs.getString("Description"), rs.getString("EID"), rs.getDouble("Expenditure"), rs.getDouble("Advance"), 
-						rs.getString("Payment Mode"), rs.getString("Cheque ID"), rs.getDouble("Balance"), rs.getString("Status")));
-			}
-			return paymentList;
+			rs.next();
+			expenseDTO = new ExpenseDTO(rs.getString("Expense ID"), rs.getDate("Date"), rs.getString("Category"), 
+					rs.getString("Description"), rs.getString("EID"), rs.getDouble("Expenditure"), rs.getDouble("Advance"), 
+					rs.getString("Payment Mode"), rs.getString("Cheque ID"), rs.getDouble("Balance"), rs.getString("Status"));
+			return expenseDTO;
 		}
 		finally {
 			if(rs != null) {
@@ -107,7 +107,7 @@ public class ExpenseDAO {
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.UPDATE_PAYMENT);
+			ps = con.prepareStatement(IExpense.UPDATE_EXPENSE);
 			ps.setString(1, expenseDTO.getExpenseID());
 			ps.setDate(2, (java.sql.Date) expenseDTO.getDate());
 			ps.setString(3, expenseDTO.getCategory());
@@ -136,13 +136,13 @@ public class ExpenseDAO {
 		}
 	}
 	
-	public boolean deleteExpense(int expenseID) throws ClassNotFoundException, SQLException {
+	public boolean deleteExpense(String expenseID) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
-			ps = con.prepareStatement(IPayment.DELETE_PAYMENT);
-			ps.setInt(1, expenseID);
+			ps = con.prepareStatement(IExpense.DELETE_EXPENSE);
+			ps.setString(1, expenseID);
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}

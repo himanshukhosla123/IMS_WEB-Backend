@@ -58,7 +58,9 @@ public class FeeDAO {
 			ps = con.prepareStatement(IFee.READ_ALL_FEE);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				feeList.add(new FeeDTO(rs.getString("TID"), rs.getString("SID"), rs.getString("CID"), rs.getDouble("Payable Amount"), rs.getDate("Installment Date"), rs.getDouble("Balance"), rs.getString("Status")));
+				feeList.add(new FeeDTO(rs.getString("TID"), rs.getString("SID"), rs.getString("CID"), 
+						rs.getDouble("Payable Amount"), rs.getDate("Installment Date"), 
+						rs.getDouble("Balance"), rs.getString("Status")));
 			}
 			return feeList;
 		}
@@ -75,22 +77,21 @@ public class FeeDAO {
 		}
 	}
 	
-	public ArrayList<FeeDTO> readFee(String tID) throws SQLException, ClassNotFoundException{
+	public FeeDTO readFee(String tID) throws SQLException, ClassNotFoundException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ArrayList<FeeDTO> feeList = new ArrayList<>();
+		FeeDTO feeDTO;
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IFee.READ_FEE);
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				feeList.add(new FeeDTO(rs.getString("TID"), rs.getString("SID"), rs.getString("BID"), rs.getString("CID"), 
-						rs.getDouble("Course Amount"), rs.getDouble("Payable Amount"), rs.getString("Payment Mode"), 
-						rs.getString("Cheque ID"), rs.getDate("Payment Date"), rs.getDate("Installment Date"), 
-						rs.getDouble("Payment"), rs.getDouble("Balance"), rs.getString("Status")));
-			}
-			return feeList;
+			rs.next();
+			feeDTO = new FeeDTO(rs.getString("TID"), rs.getString("SID"), rs.getString("BID"), rs.getString("CID"), 
+					rs.getDouble("Course Amount"), rs.getDouble("Payable Amount"), rs.getString("Payment Mode"), 
+					rs.getString("Cheque ID"), rs.getDate("Payment Date"), rs.getDate("Installment Date"), 
+					rs.getDouble("Payment"), rs.getDouble("Balance"), rs.getString("Status"));
+			return feeDTO;
 		}
 		finally {
 			if(rs != null) {
@@ -141,13 +142,13 @@ public class FeeDAO {
 		}
 	}
 	
-	public boolean deleteFee(int stuFeeId) throws ClassNotFoundException, SQLException {
+	public boolean deleteFee(String tID) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IFee.DELETE_FEE);
-			ps.setInt(1, stuFeeId);
+			ps.setString(1, tID);
 			if(ps.executeUpdate() > 0) {
 				return true;
 			}
