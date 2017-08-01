@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.ims.Common.CommonDAO.CommonDAO;
 import com.ims.Common.Utils.SqlQuery;
@@ -19,8 +20,8 @@ public class EmployeeAttendanceDAO {
 			pstmt.setInt(1, dto.getEmployeeID());
 			pstmt.setDate(2, new java.sql.Date(dto.getDate().getTime()));
 			pstmt.setString(3, dto.getStatus());
-			if(pstmt.executeUpdate()>0){
-			return true;
+			if (pstmt.executeUpdate() > 0) {
+				return true;
 			}
 			return false;
 		} finally {
@@ -32,22 +33,21 @@ public class EmployeeAttendanceDAO {
 			}
 		}
 	}
-	
-	
 
-	public ArrayList<EmployeeAttendanceDTO> readEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
+	public ArrayList<EmployeeAttendanceDTO> readEmployeeAttendance(EmployeeAttendanceDTO dto)
+			throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		ArrayList<EmployeeAttendanceDTO> al=new ArrayList<>();
+		ArrayList<EmployeeAttendanceDTO> al = new ArrayList<>();
 		try {
 			con = CommonDAO.getConnection();
 			pstm = con.prepareStatement(SqlQuery.READ_EMPLOYEE_ATT);
 			pstm.setInt(1, dto.getEmployeeID());
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				al.add(new EmployeeAttendanceDTO(rs.getInt(1), rs.getDate(2), rs.getString(3)));
-			} 
+				al.add(new EmployeeAttendanceDTO( dto.getEmployeeID(), rs.getDate(2), rs.getString(3)));
+			}
 			return al;
 		} finally {
 			if (rs != null) {
@@ -63,7 +63,35 @@ public class EmployeeAttendanceDAO {
 
 	}
 
-	public boolean updateEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException  {
+	public EmployeeAttendanceDTO readEmployeeSpecificAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			con = CommonDAO.getConnection();
+			pstm = con.prepareStatement(SqlQuery.READ_SPECIFIC_EMPLOYEE_ATT);
+			pstm.setInt(1, dto.getEmployeeID());
+			pstm.setDate(2,(java.sql.Date) new Date());
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				return new EmployeeAttendanceDTO(dto.getEmployeeID(), new Date(), rs.getString(1));
+			} 
+return null;
+} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstm != null) {
+				pstm.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+
+	}
+
+	public boolean updateEmployeeAttendance(EmployeeAttendanceDTO dto) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
