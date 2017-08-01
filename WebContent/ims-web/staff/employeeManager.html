@@ -1,0 +1,83 @@
+<section class="content-header">
+      <h1>
+        Employee
+<!--        <small>Control panel</small>-->
+    <a role="button" class="btn btn-success ajaxCall" href="ims-web/staff/new_employee.html"><i class="fa fa-plus"></i>&nbsp;New Employee</a>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li>Staff</li>
+        <li class="active">Employee</li>
+      </ol>
+    </section>
+
+   
+<section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Student List</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="employee_management_table" class="table table-bordered table-stripped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>EID</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email id</th>
+                                            <th>Joining Date</th>
+                                            <th>status</th>
+                                            <th>Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                    <tr>
+                                            <th>EID</th>
+                                            <th>Name</th>
+                                            <th>Course</th>
+                                            <th>Batch</th>
+                                            <th>Joining Date</th>
+                                            <th>Mobile</th>
+                                            <th>status</th>
+                                            <th>Option</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->                        
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+</section>
+
+<script>
+        $(function(){            
+     var tablebody = $("#employee_management_table tbody")[0];
+   for(var i=1;i<25;i++){
+   var row= tablebody.insertRow();
+   row.insertCell(0).innerHTML="015"+i;
+   row.insertCell(1).innerHTML='abc'+i;
+   row.insertCell(2).innerHTML='core java';
+   row.insertCell(3).innerHTML='B103';
+   row.insertCell(4).innerHTML='12-02-2017';      
+   row.insertCell(5).innerHTML=i*100000;
+      row.insertCell(6).innerHTML="<span>"+"active"+"</span>".toUpperCase();
+      row.children[6].children[0].classList.add("badge");
+   if(row.children[6].children[0].innerHTML.toLowerCase()==="active"){
+       row.children[6].children[0].classList.add("bg-green");
+   }else{
+       row.children[6].children[0].classList.add("bg-red");
+   }
+   row.insertCell(7).innerHTML='<button class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i></button><button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></button><button class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+}
+            
+        });
+
+    </script>

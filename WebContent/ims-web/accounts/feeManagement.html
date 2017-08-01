@@ -1,0 +1,168 @@
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><strong>Fees Collection</strong></h4>
+      </div>
+      <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="form-group">
+                  <label for="name1" class="col-sm-2 control-label">Name</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name1" placeholder="Name">
+                  </div>
+        </div>    
+        <div class="form-group">
+                  <label for="Total Fees" class="col-sm-2 control-label">Total Fees</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="TotalFees" placeholder="Total Fees">
+                  </div>
+        </div>    
+        <div class="form-group">
+                  <label for="balance" class="col-sm-2 control-label">Balance</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="balance" placeholder="balance">
+                  </div>
+        </div>    
+        <div class="form-group">
+                  <label for="pay" class="col-sm-2 control-label">Paying Amount</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="pay" placeholder="pay">
+                  </div>
+        </div>    
+               <div class="form-group">
+                <label for="mode" class="col-sm-2 control-lable">
+                Payment Mode:
+                </label>
+                <div class="col-sm-9">
+                <lable>
+                    Cash
+                </lable>
+              <input type="radio" name="r1" class="minimal form-control" id="mode" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <lable>
+                    Cheque
+                </lable>
+              <input type="radio" name="r1" class="minimal form-control" id="mode" >
+                   </div>
+              </div> 
+              <div class="form-group">
+                 <label for="datepicker" class="col-sm-1">Date:</label>
+                <div class="col-sm-4" >
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker">
+                </div>
+                  </div>&nbsp;&nbsp;&nbsp;&nbsp; 
+                  <label for="datepicker" class="col-sm-2">Next Due Date:</label>
+                <div class="col-sm-4" >
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker">
+                </div>
+                  </div> 
+              </div>  
+      </form>
+          </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-success pull-left" data-dismiss="modal">
+           Save
+       </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+   
+    <section class="content-header">
+       <h1>
+           Collect Fees
+       </h1>
+       <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li>Accounts</li>
+        <li class="active">Fee Management</li>
+      </ol>
+    </section>
+        
+    
+       <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Table With Full Features</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <table id="fee_table" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>SID</th>
+                  <th>Student Name</th>
+                  <th>Batch</th>
+                  <th>Course</th>
+                  <th>fees Status</th>
+                  <th></th>
+                </tr>
+                </thead>
+               <tbody>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Student's Name</th>
+                  <th>Total Fees</th>
+                  <th>Balance</th>
+                  <th>Next Installment</th>
+                  <th>Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+        
+  <!-- /.content-wrapper -->
+
+
+
+<script>
+  $(function(){
+     
+   var tablebody = $("#fee_table tbody")[0];
+  for(var i=1;i<25;i++){
+   var row= tablebody.insertRow();
+   row.insertCell(0).innerHTML="015"+i;
+   row.insertCell(1).innerHTML='abc'+i;
+   row.insertCell(2).innerHTML='B-103';
+   row.insertCell(3).innerHTML='core java';
+   row.insertCell(4).innerHTML="<span>"+"pending"+"</span>".toUpperCase();
+      row.children[4].children[0].classList.add("badge");
+   if(row.children[4].children[0].innerHTML.toLowerCase()==="paid"){
+       row.children[4].children[0].classList.add("bg-green");
+   }else{
+       row.children[4].children[0].classList.add("bg-red");
+   }
+   row.insertCell(5).innerHTML='<a  class="btn btn-info" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a><a class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i> </a><a  class="btn btn-danger"  data-placement="top" data-toggle="tooltip" data-original-title="Delete record"><i class="fa fa-trash"></i></a>';
+}
+  });
+</script>

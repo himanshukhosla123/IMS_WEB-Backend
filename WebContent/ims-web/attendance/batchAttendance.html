@@ -1,0 +1,81 @@
+<section class="content-header">
+      <h1>
+        Attendance
+        <small>View/Take Attendance</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Select Batch</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="batch_attendance_table" class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>Batch ID</th>
+                  <th>Batch Name</th>
+                  <th>Course</th>
+                  <th>Timing</th>
+                  <th>Days</th>
+                  <th>No. of Students</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                <tr>
+                  <th>Batch ID</th>
+                  <th>Batch Name</th>
+                  <th>Course</th>
+                  <th>Timing</th>
+                  <th>Days</th>
+                  <th>No. of Students</th>
+                  <th></th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    
+
+<script>
+    var tablebody = $("#batch_attendance_table tbody")[0];
+  for(var i=1;i<25;i++){
+   var row= tablebody.insertRow();
+   row.insertCell(0).innerHTML="015"+i;
+   row.insertCell(1).innerHTML='abc'+i;
+   row.insertCell(2).innerHTML='core java';
+   row.insertCell(3).innerHTML='6 p.m. - 3 a.m';
+   row.insertCell(4).innerHTML='weekend';      
+   row.insertCell(5).innerHTML=i*2;
+      row.insertCell(4).innerHTML="<span>"+"pending"+"</span>".toUpperCase();
+      row.children[4].children[0].classList.add("badge");
+   if(row.children[4].children[0].innerHTML.toLowerCase()==="paid"){
+       row.children[4].children[0].classList.add("bg-green");
+   }else{
+       row.children[4].children[0].classList.add("bg-red");
+   }
+   row.insertCell(6).innerHTML='<a  class="btn btn-info" type="button"><i class="fa fa-eye"></i></a><a class="btn btn-success" ><i class="fa fa-edit"></i> </a><a  class="btn btn-danger"  data-placement="top" data-toggle="tooltip" data-original-title="Delete record"><i class="fa fa-trash"></i></a>';
+}
+    
+</script>
