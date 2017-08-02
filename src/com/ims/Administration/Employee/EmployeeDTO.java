@@ -3,7 +3,7 @@ package com.ims.Administration.Employee;
 import java.util.Date;
 
 public class EmployeeDTO {
-	private int Empid;
+	private String Empid;
     private String name;
     private String age;
     private String sex;
@@ -19,15 +19,19 @@ public class EmployeeDTO {
     private String status;
     
     
-    public EmployeeDTO() {
+    @Override
+	public String toString() {
+		return "\nEmployeeDTO\n [Empid=" + Empid + ", name=" + name + ", age=" + age + ", sex=" + sex + ", phoneNo="
+				+ phoneNo + ", email=" + email + ", photo=" + photo + ", dob=" + dob + ", fatherName=" + guardianName
+				+ ", fatherPhNo=" + guardianPhNo + ", address=" + address + ", dateOfJoin=" + dateOfJoin + ", salary="
+				+ salary + ", status=" + status + "]";
+	}
+	public EmployeeDTO(){
     	
     }
-    
-    
-    public EmployeeDTO(int empid, String name, String age, String sex, String phoneNo, String email, String photo,
-			Date dob, String guardianName, String guardianPhNo, String address, Date dateOfJoin, int salary,
-			String status) {
-		Empid = empid;
+	public EmployeeDTO(String empid, String name, String age, String sex, String phoneNo, String email, String photo, Date dob,
+			String guardianName, String guardianPhNo, String address, Date dateOfJoin, int salary, String status) {
+		this.Empid = empid;
 		this.name = name;
 		this.age = age;
 		this.sex = sex;
@@ -41,31 +45,17 @@ public class EmployeeDTO {
 		this.dateOfJoin = dateOfJoin;
 		this.salary = salary;
 		this.status = status;
-		
 	}
-    
-     
-
-	@Override
-	public String toString() {
-		return "EmployeeDTO [Empid=" + Empid + ", name=" + name + ", age=" + age + ", sex=" + sex + ", phoneNo="
-				+ phoneNo + ", email=" + email + ", photo=" + photo + ", dob=" + dob + ", guardianName=" + guardianName
-				+ ", guardianPhNo=" + guardianPhNo + ", address=" + address + ", dateOfJoin=" + dateOfJoin + ", salary="
-				+ salary + ", status=" + status + "]";
-	}
-
-
-	
 	public String getPhoto() {
 		return photo;
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public int getEmpid() {
+	public String getEmpid() {
 		return Empid;
 	}
-	public void setEmpid(int empid) {
+	public void setEmpid(String empid) {
 		Empid = empid;
 	}
 	public String getName() {
