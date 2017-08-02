@@ -108,26 +108,40 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             <table id="fee_table" class="table table-bordered table-striped">
+             <table ng-init="loadFee();" id="fee_table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>SID</th>
-                  <th>Student Name</th>
-                  <th>Batch</th>
+                  <th>Transaction Id</th>
+                  <th>Student</th>
                   <th>Course</th>
-                  <th>fees Status</th>
+                  <th>Payable Amount</th>
+                  <th>Next Installment</th>
+                  <th>Balance</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
                 </thead>
                <tbody>
+              		{{error}}
+               		<tr ng-repeat="fee in feeList">
+               			<td>{{fee.transactionId}}</td>
+               			<td>{{fee.studentName}}</td>
+               			<td>{{fee.courseName}}</td>
+               			<td>{{fee.payableAmount}}</td>
+               			<td>{{fee.installmentDate}}</td>
+               			<td>{{fee.balance}}</td>
+               			<td>{{fee.status}}</td>
+               		</tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Student's Name</th>
-                  <th>Total Fees</th>
-                  <th>Balance</th>
+                  <th>Transaction Id</th>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Payable Amount</th>
                   <th>Next Installment</th>
-                  <th>Actions</th>
+                  <th>Balance</th>
+                  <th>Status</th>
                 </tr>
                 </tfoot>
               </table>
@@ -149,7 +163,7 @@
   $(function(){
      
    var tablebody = $("#fee_table tbody")[0];
-  for(var i=1;i<25;i++){
+  for(var i=1;i<1;i++){
    var row= tablebody.insertRow();
    row.insertCell(0).innerHTML="015"+i;
    row.insertCell(1).innerHTML='abc'+i;

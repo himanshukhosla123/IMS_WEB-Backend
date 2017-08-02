@@ -56,6 +56,26 @@ public class ExpenseCtrl extends HttpServlet {
 			System.out.println("WRONG INPUT");
 		}
 		}
+		/*int firstNo=Integer.parseInt(request.getParameter("firstNo"));
+		int secondNo=Integer.parseInt(request.getParameter("secondNo"));
+		int result=Integer.parseInt(request.getParameter("result"));
+		ResultDTO resultDTO=new ResultDTO(firstNo,secondNo,result);
+		System.out.println(resultDTO.toString());
+        ResultDAO resultDAO= new ResultDAO();
+        boolean isAdded=false;
+	    try {
+			isAdded = resultDAO.addResult(resultDTO);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        if(isAdded==true)System.out.println("entery done");
+        else System.out.println("entry cant happen");
+	}*/
 	}
 
 	private boolean createExpense(HttpServletRequest request, HttpServletResponse response) {
@@ -162,3 +182,26 @@ public class ExpenseCtrl extends HttpServlet {
 	}
 
 }
+
+
+/*
+String button1 = request.getParameter("button1");
+String button2 = request.getParameter("button2");
+the value which isn't null is the pressed button.
+
+Or, if you want to use the same name for the two buttons you can set a different value
+
+<input type="submit" name="act" value="delete"/>
+<input type="submit" name="act" value="update"/>
+Then
+
+String act = request.getParameter("act");
+if (act == null) {
+    //no button has been selected
+} else if (act.equals("delete")) {
+    //delete button was pressed
+} else if (act.equals("update")) {
+    //update button was pressed
+} else {
+    //someone has altered the HTML and sent a different value!
+}*/

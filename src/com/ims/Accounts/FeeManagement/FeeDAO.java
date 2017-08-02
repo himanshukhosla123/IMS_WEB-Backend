@@ -165,5 +165,21 @@ public class FeeDAO {
 			}
 		}
 	}
+	
+	/*public boolean isAlreadyPaid() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		pstmt = con.prepareStatement(SqlQuery.IF_FEE_PAID);
+		return false;
+	}*/
+	
+	/*public boolean isAlreadyExist() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		pstmt = con.prepareStatement(IFee.IF_FEE_PAID);
+		return false;
+	}*/
 
 }
