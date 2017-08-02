@@ -4,11 +4,14 @@ import static com.ims.Common.CommonDAO.CommonDAO.getConnection;
 import static com.ims.Common.sqlQueries.ISqlQueries.*;
 //import static com.ims.Common.sqlQueries.ISqlQueries.READ_STUDENT;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 
 
@@ -16,14 +19,15 @@ public class StudentDAO {
 	
 	Connection con = null;
 	PreparedStatement psmt = null;
-    public int addStudent(StudentDTO studentDTO) throws ClassNotFoundException, SQLException {
+    public boolean addStudent(StudentDTO studentDTO) throws ClassNotFoundException, SQLException {
     	
     	int recCount;
+    	boolean isAdded = false;
     	try{
     		con = getConnection();
     		con.setAutoCommit(false);
     		psmt = con.prepareStatement(ADD_STUDENT);
-    		psmt.setInt(1,studentDTO.getSid());
+    		psmt.setString(1,studentDTO.getSid());
     		psmt.setString(2,studentDTO.getName());
     		psmt.setString(3,studentDTO.getAge());
     		psmt.setString(4,studentDTO.getSex());
@@ -55,7 +59,7 @@ public class StudentDAO {
 				con.close();
 			}
 		}
-    	return recCount;
+    	return isAdded;
     	
     }
     
@@ -69,12 +73,20 @@ public class StudentDAO {
     	  psmt = con.prepareStatement(READ_STUDENT);
     	  rs = psmt.executeQuery();
     	  while(rs.next()) {
-    		 StudentDTO stud = new StudentDTO(rs.getInt(1),rs.getString(2),rs.getString(3)
+    		 StudentDTO stud = new StudentDTO(rs.getString(1),rs.getString(2),rs.getString(3)
     				                            ,rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getDate(8)
     				                            ,rs.getString(9),rs.getString(10),rs.getString(11),rs.getDate(12)
     				                            ,rs.getString(13),rs.getString(14),rs.getInt(15));
     	  
     	  studentList.add(stud);
+    	  ObjectMapper mapper = new ObjectMapper();
+    	  try {
+			String json = mapper.writeValueAsString(studentList);
+			System.out.println(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	  }
       }
       finally {
@@ -109,7 +121,7 @@ public class StudentDAO {
     		psmt.setString(12,studentDTO.getStatus());
     		psmt.setString(13, studentDTO.getRecommEmpId());
     		psmt.setInt(14, studentDTO.getDiscount());
-			psmt.setInt(15,studentDTO.getSid());
+			psmt.setString(15,studentDTO.getSid());
 
     		int recCount = psmt.executeUpdate();
     		if(recCount>0) {
@@ -135,7 +147,7 @@ public class StudentDAO {
 		con = getConnection();
 		con.setAutoCommit(false);
          psmt = con.prepareStatement(DELETE_STUDENT);
-         psmt.setInt(1, studentDTO.getSid());
+         psmt.setString(1, studentDTO.getSid());
          int recCount = psmt.executeUpdate();
          if(recCount>0) {
         	 con.commit();
