@@ -15,28 +15,28 @@
                   <label for="course_id" class="col-sm-2 control-label"> Course ID</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="course_id" placeholder="Course ID">
+                    <input type="text" class="form-control" ng-model="course.courseId" id="course_id" placeholder="Course ID">
                   </div>
         </div>
         <div class="form-group">
                   <label for="course_name1" class="col-sm-2 control-label"> Course Name</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="course_name1" placeholder="Course Name">
+                    <input type="text" class="form-control" ng-model="course.name" id="course_name1" placeholder="Course Name">
                   </div>
         </div>    
         <div class="form-group">
                   <label for="Course_Fees" class="col-sm-2 control-label">Course Fee</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="Course_Fees" placeholder="Course Fee">
+                    <input type="text" class="form-control" ng-model="course.fee" id="Course_Fees" placeholder="Course Fee">
                   </div>
         </div>    
         <div class="form-group">
                   <label for="Duration" class="col-sm-2 control-label">Duration(Approx.)</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="Duration" placeholder="Duration">
+                    <input type="text" class="form-control" id="Duration" ng-model="course.appDuration" placeholder="Duration">
                   </div>
         </div> 
         
@@ -61,9 +61,7 @@
           </div>
       
       <div class="modal-footer">
-       <button type="button" class="btn btn-primary" data-dismiss="modal">
-           Save
-       </button>
+       <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addCourse();">SAVE</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -110,12 +108,13 @@
                 </tr>
                 </thead>
                 <tbody>{{error}}
+                   {{course}}
                     <tr ng-repeat="x in courseList">
                         <td>{{x.courseId}}</td>
                         <td>{{x.name|uppercase}}</td>
                         <td>{{x.fee|currency}}</td>
                         <td>{{x.appDuration}}</td>
-                        <td><a  class="btn btn-info" type="button"><i class="fa fa-eye"></i></a><a class="btn btn-success" ><i class="fa fa-edit"></i></a><a  class="btn btn-danger"  data-placement="top" data-toggle="tooltip" data-original-title="Delete record"><i class="fa fa-trash"></i></a>
+                         <td><a class="btn btn-info" data-toggle="modal" data-target="#course_modal" ng-click="readCourse(1);" type="button"><i class="fa fa-eye"></i></a><a data-toggle="modal" data-target="#course_modal" class="btn btn-success" ng-click="updateCourse({{$index}});" ><i class="fa fa-edit"></i></a><a  class="btn btn-danger"  ng-click='deleteCourse({{$index}});'><i class="fa fa-trash"></i></a> 
                         </td>
                     </tr>
                 </tbody>
@@ -136,9 +135,5 @@
         </div>
 </section>
 <script>
-    
 
-    $(".content-header h1 button").on("click",function(){
-        console.log("fkjbkgjsdg");
-    });
 </script>

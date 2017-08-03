@@ -11,7 +11,7 @@ import com.ims.Common.CommonDAO.ICourseBatch;
 
 public class CourseDAO {
 
-	public boolean addCourse(CourseDTO courseDTO) throws SQLException, ClassNotFoundException {
+	public CourseDTO addCourse(CourseDTO courseDTO) throws SQLException, ClassNotFoundException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		try {
@@ -22,8 +22,9 @@ public class CourseDAO {
 			ps.setInt(3, courseDTO.getFee());
 			ps.setString(4, courseDTO.getDesc());
 			ps.setString(5, courseDTO.getAppDuration());
-			if(ps.executeUpdate()>0)return true;
-			else return false;
+			if(ps.executeUpdate()>0)
+			return courseDTO;
+			else return null;
 		}
 		finally{
 			if(ps!=null)ps.close();
@@ -32,7 +33,7 @@ public class CourseDAO {
 			
 	}
 	
-	public ArrayList<CourseDTO> readCourse(CourseDTO courseDTO) throws SQLException, ClassNotFoundException{
+	public ArrayList<CourseDTO> readCourseList() throws SQLException, ClassNotFoundException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -53,8 +54,29 @@ public class CourseDAO {
 		}
 	}
 	
+	
+	public CourseDTO readCourse(CourseDTO courseDTO) throws SQLException, ClassNotFoundException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			con=CommonDAO.getConnection();
+			ps=con.prepareStatement(ICourseBatch.SELECTCOURSE);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				courseDTO=new CourseDTO(rs.getString(1),rs.getString(2), rs.getInt(3),rs.getString(4),rs.getString(5));
+			}
+			return courseDTO;
+		}
+		finally {
+			if(rs!=null)rs.close();
+			if(ps!=null)ps.close();
+			if(con!=null)con.close();
+		}
+	}
+	
 
-	public boolean updateCourse(CourseDTO courseDTO) throws ClassNotFoundException, SQLException {
+	public CourseDTO updateCourse(CourseDTO courseDTO) throws ClassNotFoundException, SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		try {
@@ -65,8 +87,9 @@ public class CourseDAO {
 			ps.setString(3,courseDTO.getDesc());
 			ps.setString(4,courseDTO.getAppDuration());
 			ps.setString(5,courseDTO.getCourseId());
-			if(ps.executeUpdate()>0)return true;
-			else return false;
+			if(ps.executeUpdate()>0)
+			return courseDTO;
+			else return null;
 		}
 		finally {
 			if(ps!=null)ps.close();
@@ -74,15 +97,16 @@ public class CourseDAO {
 		}
 	}
 	
-	public boolean deleteCourse(CourseDTO courseDTO) throws ClassNotFoundException, SQLException {
+	public CourseDTO deleteCourse(CourseDTO courseDTO) throws ClassNotFoundException, SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		try{
 			con=CommonDAO.getConnection();
 			ps=con.prepareStatement(ICourseBatch.DELETECOURSE);
 			ps.setString(1, courseDTO.getCourseId());
-			if(ps.executeUpdate()>0)return true;
-			else return false;
+			if(ps.executeUpdate()>0)
+			return courseDTO;
+			else return null;
 		}
 		finally {
 			if(ps!=null)ps.close();

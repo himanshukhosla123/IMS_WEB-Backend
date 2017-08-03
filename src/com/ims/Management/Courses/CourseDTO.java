@@ -16,6 +16,17 @@ public class CourseDTO {
 		this.appDuration=appDuration;
 	}
 
+	
+	public CourseDTO(String courseId, String name, int fee, String appDuration) {
+		super();
+		this.CourseId = courseId;
+		this.name = name;
+		this.fee = fee;
+		this.appDuration = appDuration;
+	}
+   
+	public CourseDTO() {}
+
 	public String getCourseId() {
 		return CourseId;
 	}
