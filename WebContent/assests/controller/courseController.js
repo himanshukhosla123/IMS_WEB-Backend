@@ -78,7 +78,7 @@ app.controller("coursectrl",function($scope,coursefactory){
             $scope.updateCourse(dto_obj);
             console.log("Calling update course");
         }
-        $scope.resetFeilds();
+//         $scope.resetFeilds();
     }
 
 });
