@@ -62,6 +62,7 @@ public class CourseDAO {
 		try {
 			con=CommonDAO.getConnection();
 			ps=con.prepareStatement(ICourseBatch.SELECTCOURSE);
+			ps.setString(1,courseDTO.getCourseId());
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				courseDTO=new CourseDTO(rs.getString(1),rs.getString(2), rs.getInt(3),rs.getString(4),rs.getString(5));

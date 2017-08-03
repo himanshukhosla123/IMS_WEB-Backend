@@ -49,6 +49,7 @@ app.factory("coursefactory",function($q,$http){
      },
      updateCourse:function(course){
     	 var pr=$q.defer();
+         console.log(course);
     	 $http({
         	 method:"post",
         	 url:"http://localhost:8080/IMS-WEB__backend/course",
