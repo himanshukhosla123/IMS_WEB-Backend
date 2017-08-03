@@ -8,6 +8,7 @@ public interface IFee {
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	final String READ_ALL_FEE = "SELECT `TID`, `SID`, `CID`, `Payable Amount`, "
 			+ "`Installment Date`, `Balance`, `Status` FROM `fee`;";
+	final String READ_FEE = "SELECT * FROM `fee` WHERE `TID` = ?";
 	final String UPDATE_FEE = "UPDATE `fee` SET `TID` = ?, `SID` = ?, "
 			+ "`BID` = ?, `CID` = ?, `Course Amount` = ?, `Payable Amount` = ?, "
 			+ "`Payment Mode` = ?, `Cheque Id = ?`, `Payment Date = ?`, `Installment Date = ?`, "
