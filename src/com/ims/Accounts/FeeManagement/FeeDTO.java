@@ -13,13 +13,16 @@ public class FeeDTO {
 	private double payableAmount; //PAYABLE AMOUNT AFTER OFFER AND DISCOUNT
 	private String paymentMode;
 	private String ChequeId;
-	private Date paymentDate;
-	private Date installmentDate;
+	private String paymentDate;
+	private String installmentDate;
 	private double payment; // AMOUNT PAID ON PAYMENT_DATE
 	private double balance; // AMOUNT REMAINING
 	private String status;
 
-	public FeeDTO(String tID, String sID, String cID, double payableAmount, Date installmentDate, double balance,
+	public FeeDTO() {	
+	}
+	
+	public FeeDTO(String tID, String sID, String cID, double payableAmount, String installmentDate, double balance,
 			String status) {
 		super();
 		TID = tID;
@@ -32,7 +35,7 @@ public class FeeDTO {
 	}
 
 	public FeeDTO(String tID, String sID, String bID, String cID, double courseAmount, double payableAmount,
-			String paymentMode, String chequeId, Date paymentDate, Date installmentDate, double payment, double balance,
+			String paymentMode, String chequeId, String paymentDate, String installmentDate, double payment, double balance,
 			String status) {
 		super();
 		TID = tID;
@@ -122,19 +125,19 @@ public class FeeDTO {
 		ChequeId = chequeId;
 	}
 
-	public Date getPaymentDate() {
+	public String getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(Date paymentDate) {
+	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
-	public Date getInstallmentDate() {
+	public String getInstallmentDate() {
 		return installmentDate;
 	}
 
-	public void setInstallmentDate(Date installmentDate) {
+	public void setInstallmentDate(String installmentDate) {
 		this.installmentDate = installmentDate;
 	}
 
