@@ -41,8 +41,7 @@ public class StudentAttendanceDAO {
 	/*
 	 * Require SID, BID
 	 */
-	public ArrayList<StudentAttendanceDTO> readStudentAttendance(StudentAttendanceDTO dto)
-			throws ClassNotFoundException, SQLException {
+	public ArrayList<StudentAttendanceDTO> readStudentAttendance() throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -50,8 +49,6 @@ public class StudentAttendanceDAO {
 		try {
 			con = CommonDAO.getConnection();
 			pstm = con.prepareStatement(SqlQuery.READ_STUDENT_ATT);
-			pstm.setInt(1, dto.getStudentID());
-			pstm.setInt(2, dto.getBatchID());
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				al.add(new StudentAttendanceDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4)));
@@ -84,10 +81,12 @@ public class StudentAttendanceDAO {
 			pstm = con.prepareStatement(SqlQuery.READ_SPECIFIC_STUDENT_ATT);
 			pstm.setInt(1, dto.getStudentID());
 			pstm.setInt(2, dto.getBatchID());
-			pstm.setDate(3, new java.sql.Date(new Date().getTime()));
+			pstm.setDate(3, new java.sql.Date(dto.getDate().getTime()));
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				return (new StudentAttendanceDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4)));
+
+				return (new StudentAttendanceDTO(rs.getInt(1), rs.getInt(2), new Date(rs.getDate(3).getTime()),
+						rs.getString(4)));
 			}
 			return null;
 		} finally {
@@ -121,6 +120,30 @@ public class StudentAttendanceDAO {
 			pstmt.setString(1, dto.getStatus());
 			pstmt.executeUpdate();
 			return readSpecificStudentAttendance(dto);
+		} finally
+
+		{
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	public StudentAttendanceDTO deleteStudentAttendance(StudentAttendanceDTO dto)
+			throws ClassNotFoundException, SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = CommonDAO.getConnection();
+			pstmt = con.prepareStatement(SqlQuery.DELETE_STUDENT_ATT);
+			pstmt.setInt(1, dto.getStudentID());
+			pstmt.setInt(2, dto.getBatchID());
+			pstmt.setDate(3, new java.sql.Date(dto.getDate().getTime()));
+			pstmt.executeUpdate();
+			return dto;
 		} finally
 
 		{

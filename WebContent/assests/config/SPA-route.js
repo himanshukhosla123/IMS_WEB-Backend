@@ -8,10 +8,9 @@ app.config(function($routeProvider,$locationProvider){
 //        controller:"homeCtrl"
     }).when("/studentManager",{
         templateUrl:"ims-web/staff/studentManager.html",
-        controller:"studentController"
+//        controller:"loginCtrl"
     }).when("/employeeManager",{
-        templateUrl:"ims-web/staff/employeeManager.html",
-        controller:"employeeController"
+        templateUrl:"ims-web/staff/employeeManager.html"
     }).when("/feeManagement",{
         templateUrl:"ims-web/accounts/feeManagement.html",
         controller:""
@@ -32,13 +31,13 @@ app.config(function($routeProvider,$locationProvider){
         controller:""
     }).when("/studentAttendance",{
         templateUrl:"ims-web/attendance/studentAttendance.html",
-        controller:""
+        controller:"studentAttendanceController"
     }).when("/employeeAttendance",{
         templateUrl:"ims-web/attendance/employeeAttendance.html",
-        controller:""
+        controller:"empAttctr"
     }).when("/enquiry",{
         templateUrl:"ims-web/enquiry.html",
-        controller:""
+        controller:"startctr"
     }).when("/calendar",{
         templateUrl:"ims-web/calendar.html",
         controller:""

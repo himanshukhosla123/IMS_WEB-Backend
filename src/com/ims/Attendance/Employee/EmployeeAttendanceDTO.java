@@ -3,6 +3,11 @@ package com.ims.Attendance.Employee;
 import java.util.Date;
 
 public class EmployeeAttendanceDTO {
+	@Override
+	public String toString() {
+		return "EmployeeAttendanceDTO [employeeID=" + employeeID + ", date=" + date + ", status=" + status + "]";
+	}
+
 	private int employeeID;
 	private Date date;
 	private String status;
