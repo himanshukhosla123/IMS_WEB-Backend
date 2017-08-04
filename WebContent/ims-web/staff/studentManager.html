@@ -2,7 +2,7 @@
       <h1>
         Student
 <!--        <small>Control panel</small>-->
-     <a role="button" class="btn btn-success ajaxCall" href="ims-web/staff/new_student.html"><i class="fa fa-plus"></i>&nbsp;New Student</a>
+     <a role="button" class="btn btn-success" href="ims-web/staff/new_student.html"><i class="fa fa-plus"></i>&nbsp;New Student</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -12,7 +12,7 @@
     </section>
 
    
-<section class="content">
+<section class="content" ng-controller="studentController">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
@@ -21,7 +21,7 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table id="student_management_table" class="table table-bordered table-stripped table-hover">
+                                <table ng-init="loadStudentData()" id="student_management_table" class="table table-bordered table-stripped table-hover">
                                     <thead>
                                         <tr>
                                             <th>SID</th>
@@ -34,7 +34,18 @@
                                             <th>Option</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                    {{studentData}}
+									     <tr ng-repeat="x in studentData">
+									       <td>{{x.sid}}</td>
+									       <td>{{x.name}}</td>
+									       <td>{{x.courseName}}</td>
+									       <td>{{x.batchID}}</td>
+									       <td>{{x.dateofjoining}}</td>  
+									       <td>{{x.phoneNo}}</td>
+									       <td>{{x.status}}</td>
+									     </tr>
+                                    </tbody>
                                     <tfoot>
                                     <tr>
                                      <th>SID</th>
@@ -62,7 +73,7 @@
         $(function(){
                     
      var tablebody = $("#student_management_table tbody")[0];
-  for(var i=1;i<25;i++){
+  for(var i=1;i<1;i++){
    var row= tablebody.insertRow();
    row.insertCell(0).innerHTML="015"+i;
    row.insertCell(1).innerHTML='abc'+i;

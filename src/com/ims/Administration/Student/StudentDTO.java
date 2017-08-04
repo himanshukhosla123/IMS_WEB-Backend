@@ -3,7 +3,7 @@ package com.ims.Administration.Student;
 import java.util.Date;
 
 public class StudentDTO {
-    private int Sid;
+    private String Sid;
     private String name;
     private String age;
     private String sex;
@@ -35,7 +35,7 @@ public String toString() {
 
 
 
-public StudentDTO(int sid, String name, String age, String sex, String phoneNo, String email, String photoPath,
+public StudentDTO(String sid, String name, String age, String sex, String phoneNo, String email, String photoPath,
 		Date dob, String guardianName, String guardianPhNo, String address, Date dateOfJoin, String status,
 		String recommEmpId, int discount) {
 	Sid = sid;
@@ -56,13 +56,13 @@ public StudentDTO(int sid, String name, String age, String sex, String phoneNo, 
 }
 
 
-public int getSid() {
+public String getSid() {
 	return Sid;
 }
 
 
 
-public void setSid(int sid) {
+public void setSid(String sid) {
 	Sid = sid;
 }
 

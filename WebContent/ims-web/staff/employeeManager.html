@@ -12,7 +12,7 @@
     </section>
 
    
-<section class="content">
+<section class="content" ng-controller="employeeController">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
@@ -21,25 +21,33 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table id="employee_management_table" class="table table-bordered table-stripped table-hover">
+                                <table ng-init=loadEmployeeData() id="employee_management_table" class="table table-bordered table-stripped table-hover">
                                     <thead>
                                         <tr>
                                             <th>EID</th>
                                             <th>Name</th>
                                             <th>Mobile</th>
-                                            <th>Email id</th>
                                             <th>Joining Date</th>
                                             <th>status</th>
                                             <th>Option</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                         {{employeeData}}
+                                         <tr ng-repeat="x in employeeData">
+									       <td>{{x.empid}}</td>
+									       <td>{{x.name}}</td>
+									       <td>{{x.dateofjoining}}</td>  
+									       <td>{{x.phoneNo}}</td>
+									       <td>{{x.status}}</td>
+									     </tr>
+                                    
+                                    
+                                    </tbody>
                                     <tfoot>
                                     <tr>
                                             <th>EID</th>
                                             <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Batch</th>
                                             <th>Joining Date</th>
                                             <th>Mobile</th>
                                             <th>status</th>
@@ -60,7 +68,7 @@
 <script>
         $(function(){            
      var tablebody = $("#employee_management_table tbody")[0];
-   for(var i=1;i<25;i++){
+   for(var i=1;i<1;i++){
    var row= tablebody.insertRow();
    row.insertCell(0).innerHTML="015"+i;
    row.insertCell(1).innerHTML='abc'+i;
