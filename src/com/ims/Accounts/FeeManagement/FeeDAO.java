@@ -13,26 +13,26 @@ import com.ims.Common.Utils.CustomDateFormat;
 
 public class FeeDAO {
 	
-	
 	public FeeDTO addFee(FeeDTO feeDTO) throws SQLException, ClassNotFoundException, ParseException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IFee.CREATE_FEE);
-			ps.setString(1, feeDTO.getTID());
+			ps.setString(1, "101");
 			ps.setString(2, feeDTO.getSID());
 			ps.setString(3, feeDTO.getBID());
-			ps.setString(4, feeDTO.getCID());
+			ps.setString(4, "101");
 			ps.setDouble(5, feeDTO.getCourseAmount());
-			ps.setDouble(6, feeDTO.getPayableAmount());
+			ps.setDouble(6, 101);
 			ps.setString(7, feeDTO.getPaymentMode());
-			ps.setString(8, feeDTO.getChequeId());
-			ps.setDate(9, CustomDateFormat.getDate(feeDTO.getPaymentDate()));
-			ps.setDate(10, CustomDateFormat.getDate(feeDTO.getPaymentDate()));
+			ps.setString(8, "101");
+			System.out.println(feeDTO);
+			ps.setDate(9, new java.sql.Date(CustomDateFormat.getDate(feeDTO.getPaymentDate()).getTime()));
+			ps.setDate(10, new java.sql.Date(CustomDateFormat.getDate(feeDTO.getPaymentDate()).getTime()));
 			ps.setDouble(11, feeDTO.getPayment());
 			ps.setDouble(12, feeDTO.getBalance());
-			ps.setString(13, feeDTO.getStatus());
+			ps.setString(13, "101");
 			if(ps.executeUpdate() > 0) {
 				return feeDTO;
 			}
@@ -64,6 +64,7 @@ public class FeeDAO {
 						rs.getDouble("Payable Amount"), rs.getString("Installment Date"), 
 						rs.getDouble("Balance"), rs.getString("Status")));
 			}
+			System.out.println(feeList);
 			return feeList;
 		}
 		finally {
@@ -86,7 +87,7 @@ public class FeeDAO {
 		try {
 			con = CommonDAO.getConnection();
 			ps = con.prepareStatement(IFee.READ_FEE);
-			ps.setString(1, feeDTO.getTID());
+			ps.setString(1, "101");
 			rs = ps.executeQuery();
 			rs.next();
 			feeDTO = new FeeDTO(rs.getString("TID"), rs.getString("SID"), rs.getString("BID"), rs.getString("CID"), 
@@ -122,8 +123,8 @@ public class FeeDAO {
 			ps.setDouble(6, feeDTO.getPayableAmount());
 			ps.setString(7, feeDTO.getPaymentMode());
 			ps.setString(8, feeDTO.getChequeId());
-			ps.setDate(9, CustomDateFormat.getDate(feeDTO.getPaymentDate()));
-			ps.setDate(10, CustomDateFormat.getDate(feeDTO.getInstallmentDate()));
+			ps.setDate(9, (java.sql.Date) CustomDateFormat.getDate(feeDTO.getPaymentDate()));
+			ps.setDate(10, (java.sql.Date) CustomDateFormat.getDate(feeDTO.getInstallmentDate()));
 			ps.setDouble(11, feeDTO.getPayment());
 			ps.setDouble(12, feeDTO.getBalance());
 			ps.setString(13, feeDTO.getStatus());
@@ -168,21 +169,5 @@ public class FeeDAO {
 			}
 		}
 	}
-	
-	/*public boolean isAlreadyPaid() throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		pstmt = con.prepareStatement(SqlQuery.IF_FEE_PAID);
-		return false;
-	}*/
-	
-	/*public boolean isAlreadyExist() throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		pstmt = con.prepareStatement(IFee.IF_FEE_PAID);
-		return false;
-	}*/
 
 }

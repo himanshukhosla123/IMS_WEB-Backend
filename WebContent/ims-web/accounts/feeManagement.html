@@ -1,75 +1,82 @@
 <!-- Modal -->
-<div id="fee_modal" class="modal fade" role="dialog">
+<div id="fee_modal" class="modal fade" role="dialog" data-backdrop="static">
   <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" data-backdrop="static" ng-click="resetFields();">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" ng-click="resetFields();">&times;</button>
           <h4 class="modal-title"><strong>Fees Collection</strong></h4>
       </div>
       <div class="modal-body">
       <form class="form-horizontal">
         <div class="form-group">
-                  <label for="name1" class="col-sm-2 control-label" ng-modal="fee.">Student Name</label>
+                  <label for="name1" class="col-sm-2 control-label">Student Name</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="fee.name" id="name1" placeholder="Name of Student @Eg. Hitesh Sharma">
+                    <input type="text" class="form-control" ng-model="fee.sid" id="name1" ng-disabled="doDisable" placeholder="Name of Student @Eg. Hitesh Sharma">
                   </div>
         </div>    
         <div class="form-group">
-                  <label for="Total Fees" class="col-sm-2 control-label" ng-modal="fee.courseAmount">Total Fees</label>
+                  <label for="Total Fees" class="col-sm-2 control-label">Total Fees</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="TotalFees" placeholder="Total Fees of the course">
+                    <input type="text" class="form-control" id="TotalFees" ng-model="fee.courseAmount" ng-disabled="doDisable" placeholder="Total Fees of the course">
                   </div>
         </div>    
         <div class="form-group">
-                  <label for="balance" class="col-sm-2 control-label" ng-modal="fee.balance">Balance</label>
+                  <label for="balance" class="col-sm-2 control-label">Balance</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="balance" placeholder="Remaining Balance">
+                    <input type="text" class="form-control" id="balance" ng-model="fee.balance" ng-disabled="doDisable" placeholder="Remaining Balance">
                   </div>
         </div>    
         <div class="form-group">
-                  <label for="pay" class="col-sm-2 control-label" ng-modal="fee.payment">Paying Amount</label>
+                  <label for="pay" class="col-sm-2 control-label">Paying Amount</label>
 
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="pay" placeholder="Amount paying">
+                    <input type="text" class="form-control" id="pay" ng-model="fee.payment" ng-disabled="doDisable" placeholder="Amount paying">
                   </div>
         </div>    
                <div class="form-group">
-                <label for="mode" class="col-sm-2 control-lable" ng-modal="paymentMode">
+                <label for="mode" class="col-sm-2 control-lable">
                 Payment Mode:
                 </label>
                 <div class="col-sm-9">
+                <select ng-model="fee.paymentMode">
+                    <option>Cash</option>
+                    <option>Cheque</option>
+                </select>
+                <input type="radio" name="r1" class="minimal form-control" id="mode" ng-model="fee.payment" ng-disabled="doDisable" >
+<!--
                 <lable>
                     Cash
                 </lable>
-              <input type="radio" name="r1" class="minimal form-control" id="mode" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="r1" class="minimal form-control"  id="mode" ng-disabled="doDisable" checked>&nbsp;&nbsp;&nbsp;&nbsp;
                   <lable ng-modal="chequeId">
                     Cheque
                 </lable>
-              <input type="radio" name="r1" class="minimal form-control" id="mode" >
+              <input type="radio" name="r1" class="minimal form-control" id="mode" ng-disabled="doDisable" >
+-->
                    </div>
               </div> 
               <div class="form-group">
-                 <label for="datepicker" class="col-sm-1" ng-modal="paymentDate">Date:</label>
-                <div class="col-sm-4" >
+                 <label for="datepicker" class="col-sm-1">Date:</label>
+                <div class="col-sm-4">
                 <div class="input-group date">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
+                  <input type="text" class="form-control pull-right" ng-model="fee.paymentDate" id="datepicker" ng-disabled="doDisable">
                 </div>
                   </div>&nbsp;&nbsp;&nbsp;&nbsp; 
-                  <label for="datepicker" class="col-sm-2" ng-modal="fee.installmentDate">Installment Date:</label>
+                  <label for="datepicker" class="col-sm-2">Installment Date:</label>
                 <div class="col-sm-4" >
                 <div class="input-group date">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
+                  <input type="text" class="form-control pull-right" ng-model="fee.installmentDate" id="datepicker" ng-disabled="doDisable">
                 </div>
                   </div> 
               </div>  
@@ -77,10 +84,8 @@
           </div>
       
       <div class="modal-footer">
-       <button type="button" class="btn btn-success pull-left" data-dismiss="modal">
-           Save
-       </button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-success pull-left" data-dismiss="modal" ng-click="manageAddorUpdateFee();">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetFeilds();">Close</button>
       </div>
     </div>
 
@@ -89,7 +94,7 @@
    
     <section class="content-header">
        <h1>
-           <button type="button" class="btn btn-success" data-target="#fee_modal" data-toggle="modal"><i class="fa fa-plus">&nbsp;&nbsp;&nbsp; Add Fee</i></button> 
+           <button type="button" class="btn btn-success" data-target="#fee_modal" data-toggle="modal" ng-click="onAddMode();"><i class="fa fa-plus">&nbsp;&nbsp;&nbsp; Add Fee</i></button> 
            Collect Fees
        </h1>
        <ol class="breadcrumb">
@@ -100,7 +105,7 @@
     </section>
         
     
-       <section class="content" ng-controller="feeCtrl">
+       <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -109,7 +114,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             <table ng-init="readAllFee();" id="fee_table" class="table table-bordered table-striped">
+             <table ng-init="readAllFee(); resetFeilds();" id="fee_table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Student</th>
@@ -123,6 +128,7 @@
                 </thead>
                <tbody>
               		{{error}}
+              		{{fee}}
                		<tr ng-repeat="fee in feeList">
                			<td>{{fee.sid}}</td>
                			<td>{{fee.cid}}</td>
@@ -130,7 +136,7 @@
                			<td>{{fee.installmentDate}}</td>
                			<td>{{fee.balance}}</td>
                			<td>{{fee.status}}</td>
-               			<td><a class="btn btn-info" data-toggle="modal" data-target="#fee_modal" ng-click="readFee($index);" type="button"><i class="fa fa-eye"></i></a><a data-toggle="modal" data-target="#fee_modal" class="btn btn-success" ng-click="updateFee($index);" ><i class="fa fa-edit"></i></a><a  class="btn btn-danger"  ng-click='deleteFee($index);'><i class="fa fa-trash"></i></a></td>
+               			<td><a class="btn btn-info" data-toggle="modal" data-target="#fee_modal" ng-click="readFee($index,true);" type="button"><i class="fa fa-eye"></i></a><a data-toggle="modal" data-target="#fee_modal" class="btn btn-success" ng-click="readFee($index,false);"><i class="fa fa-edit"></i></a><a  class="btn btn-danger"  ng-click='deleteFee($index);'><i class="fa fa-trash"></i></a></td>
                		</tr>
                 </tbody>
                 <tfoot>
@@ -160,23 +166,23 @@
 
 
 <script>
-  $(function(){
+//$(function(){
      
-   var tablebody = $("#fee_table tbody")[0];
-  for(var i=1;i<1;i++){
-   var row= tablebody.insertRow();
-   row.insertCell(0).innerHTML="015"+i;
-   row.insertCell(1).innerHTML='abc'+i;
-   row.insertCell(2).innerHTML='B-103';
-   row.insertCell(3).innerHTML='core java';
-   row.insertCell(4).innerHTML="<span>"+"pending"+"</span>".toUpperCase();
-      row.children[4].children[0].classList.add("badge");
-   if(row.children[4].children[0].innerHTML.toLowerCase()==="paid"){
-       row.children[4].children[0].classList.add("bg-green");
-   }else{
-       row.children[4].children[0].classList.add("bg-red");
-   }
-   row.insertCell(5).innerHTML='<a  class="btn btn-info" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a><a class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i> </a><a  class="btn btn-danger"  data-placement="top" data-toggle="tooltip" data-original-title="Delete record"><i class="fa fa-trash"></i></a>';
-}
-  });
+   //var tablebody = $("#fee_table tbody")[0];
+   //for(var i=1;i<1;i++){
+   //var row= tablebody.insertRow();
+   //row.insertCell(0).innerHTML="015"+i;
+   //row.insertCell(1).innerHTML='abc'+i;
+   //row.insertCell(2).innerHTML='B-103';
+   //row.insertCell(3).innerHTML='core java';
+   //row.insertCell(4).innerHTML="<span>"+"pending"+"</span>".toUpperCase();
+   //row.children[4].children[0].classList.add("badge");
+   //if(row.children[4].children[0].innerHTML.toLowerCase()==="paid"){
+       //row.children[4].children[0].classList.add("bg-green");
+   //}else{
+       //row.children[4].children[0].classList.add("bg-red");
+   //}
+   //row.insertCell(5).innerHTML='<a  class="btn btn-info" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a><a class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i> </a><a  class="btn btn-danger"  data-placement="top" data-toggle="tooltip" data-original-title="Delete record"><i class="fa fa-trash"></i></a>';
+//}
+  //});
 </script>

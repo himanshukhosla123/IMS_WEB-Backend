@@ -36,10 +36,11 @@ public class FeeCtrl extends HttpServlet {
 //		response.setContentType("application/json");
 		String method = request.getParameter("method");
 		String jsonDTO = request.getParameter("dto_obj");
-		try{
+		try {
 			switch(method) {
 			case "add": {
 				feeDTO = mapper.readValue(jsonDTO, new TypeReference<FeeDTO>(){});
+				System.out.println(jsonDTO);
 				feeDTO = feeDAO.addFee(feeDTO);
 				json = mapper.writeValueAsString(feeDTO);
 				response.getWriter().println(json);

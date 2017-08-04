@@ -61,7 +61,7 @@ public class CourseDAO {
 		ResultSet rs=null;
 		try {
 			con=CommonDAO.getConnection();
-			ps=con.prepareStatement(ICourseBatch.SELECTCOURSE);
+			ps=con.prepareStatement(ICourseBatch.SELECTCOURSES);
 			ps.setString(1,courseDTO.getCourseId());
 			rs=ps.executeQuery();
 			while(rs.next()) {

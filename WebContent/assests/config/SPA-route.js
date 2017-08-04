@@ -8,13 +8,12 @@ app.config(function($routeProvider,$locationProvider){
 //        controller:"homeCtrl"
     }).when("/studentManager",{
         templateUrl:"ims-web/staff/studentManager.html",
-        controller:"studentController"
+//        controller:"loginCtrl"
     }).when("/employeeManager",{
-        templateUrl:"ims-web/staff/employeeManager.html",
-        controller:"employeeController"
+        templateUrl:"ims-web/staff/employeeManager.html"
     }).when("/feeManagement",{
         templateUrl:"ims-web/accounts/feeManagement.html",
-        controller:""
+        controller:"feeCtrl"
     }).when("/expenses",{
         templateUrl:"ims-web/accounts/expenses.html",
         controller:""
