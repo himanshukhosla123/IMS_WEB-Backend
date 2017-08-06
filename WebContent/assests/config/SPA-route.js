@@ -31,13 +31,13 @@ app.config(function($routeProvider,$locationProvider){
         controller:""
     }).when("/studentAttendance",{
         templateUrl:"ims-web/attendance/studentAttendance.html",
-        controller:"studentAttendanceController"
+        controller:""
     }).when("/employeeAttendance",{
         templateUrl:"ims-web/attendance/employeeAttendance.html",
-        controller:"empAttctr"
+        controller:""
     }).when("/enquiry",{
         templateUrl:"ims-web/enquiry.html",
-        controller:"startctr"
+        controller:""
     }).when("/calendar",{
         templateUrl:"ims-web/calendar.html",
         controller:""
