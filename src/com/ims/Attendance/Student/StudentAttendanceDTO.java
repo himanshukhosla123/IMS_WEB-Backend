@@ -13,12 +13,6 @@ public class StudentAttendanceDTO {
 		return "StudentAttendanceDTO [studentID=" + studentID + ", batchID=" + batchID + ", date=" + date + ", status="
 				+ status + "]";
 	}
-	
-
-	public StudentAttendanceDTO() {
-		super();
-	}
-
 
 	public StudentAttendanceDTO(int batchID, Date date) {
 		this.batchID = batchID;

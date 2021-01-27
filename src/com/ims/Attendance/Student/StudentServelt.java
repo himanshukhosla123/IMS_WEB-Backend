@@ -2,18 +2,13 @@ package com.ims.Attendance.Student;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-
-import com.ims.Common.Utils.CustomDateFormat;
 
 /**
  * Servlet implementation class StudentServelt
@@ -23,62 +18,44 @@ public class StudentServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @return
-	 * @return
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		StudentAttendanceDAO dao = new StudentAttendanceDAO();
-		ObjectMapper map = new ObjectMapper();
-		String method = request.getParameter("method");
-		String json = request.getParameter("dto");
-		StudentAttendanceDTO dto;
+		StudentAttendanceDTO dto = new StudentAttendanceDTO(420,420,new Date(),"test");
+		String me = request.getParameter("method");
 
-		/*
-		 * RequestDispatcher rs=request.getRequestDispatcher("/index.html");
-		 */ try {
-			switch (method) {
+		try {
+			switch (me) {
 			case "addStudentAttendance":
-				dto = (StudentAttendanceDTO) map.readValue(json, new TypeReference<StudentAttendanceDTO>() {
-				});
-				response.getWriter().println(map.writeValueAsString(dao.addStudentAttendance(dto)));
+				response.getWriter().println(((Boolean) dao.addStudentAttendance(dto)).toString());
 				break;
 			case "readStudentAttendance":
-				response.getWriter().println(map.writeValueAsString(dao.readStudentAttendance()));
+				response.getWriter().println((dao.readStudentAttendance(dto)).toString());
 				break;
 			case "readSpecificStudentAttendance":
-				dto = new StudentAttendanceDTO(4310, 4321, CustomDateFormat.getDate("20/01/2016"), "test2");
-				response.getWriter().println(map.writeValueAsString(dao.readSpecificStudentAttendance(dto)));
+				response.getWriter().println((dao.readSpecificStudentAttendance(dto)).toString());
 				break;
 			case "updateStudentAttendance":
-				dto = (StudentAttendanceDTO) map.readValue(json, new TypeReference<StudentAttendanceDTO>() {
-				});
-				response.getWriter().println(map.writeValueAsString(dao.updateStudentAttendance(dto)));
+				response.getWriter().println(((Boolean) dao.updateStudentAttendance(dto)).toString());
 				break;
-
-			case "deleteStudentAttendance":
-				dto = (StudentAttendanceDTO) map.readValue(json, new TypeReference<StudentAttendanceDTO>() {
-				});
-				response.getWriter().println(map.writeValueAsString(dao.deleteStudentAttendance(dto)));
-
-				break;
-			default:
-					response.getWriter().println(map.writeValueAsString("Wrong Call"));
+			default:response.getWriter().println("Wrong Call");
 				break;
 			}
 
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
+
+	
 }
